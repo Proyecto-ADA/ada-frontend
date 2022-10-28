@@ -20,19 +20,7 @@ export class HomePageComponent implements OnInit {
     })
   }
 
-  async openDialog() {
-    const response = await this.questionsService.addQuestion({
-      answer1: 'pruebas',
-      answer2: 'asdasd',
-      answuer3: 'asdasd',
-      isEnabled: true,
-      quesiton: 'asdasd',
-      score: 1500,
-      rightAnswerNumber: 1,
-    })
-
-    console.log(response)
-
+  openDialog() {
     this.dialog.open(LoginFormComponent)
   }
 }
