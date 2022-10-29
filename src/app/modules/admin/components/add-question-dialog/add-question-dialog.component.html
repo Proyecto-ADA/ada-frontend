@@ -1,0 +1,82 @@
+<h1 mat-dialog-title>Agrega una nueva pregunta</h1>
+<form mat-dialog-content [formGroup]="questionForm" (submit)="addQuestion()">
+  <mat-form-field appearance="fill">
+    <mat-label>Pregunta</mat-label>
+    <input matInput id="question" formControlName="question" />
+  </mat-form-field>
+
+  <div
+    class="error"
+    *ngIf="question?.invalid && (question?.dirty || question?.touched)"
+  >
+    Ingresar pregunta de por lo menos 20 caracteres
+  </div>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Respuesta 1</mat-label>
+    <input matInput id="answer1" formControlName="answer1" />
+  </mat-form-field>
+  <div
+    class="error"
+    *ngIf="answer1?.invalid && (answer1?.dirty || answer1?.touched)"
+  >
+    Ingresar respuesta de por lo menos 10 caracteres
+  </div>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Respuesta 2</mat-label>
+    <input matInput id="answer2" formControlName="answer2" />
+  </mat-form-field>
+  <div
+    class="error"
+    *ngIf="answer2?.invalid && (answer2?.dirty || answer2?.touched)"
+  >
+    Ingresar respuesta de por lo menos 10 caracteres
+  </div>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Respuesta 3</mat-label>
+    <input matInput id="answer3" formControlName="answer3" />
+  </mat-form-field>
+
+  <div
+    class="error"
+    *ngIf="answer3?.invalid && (answer3?.dirty || answer3?.touched)"
+  >
+    Ingresar respuesta de por lo menos 10 caracteres
+  </div>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Selecciona la respuesta correcta</mat-label>
+    <mat-select formControlName="rightAnswerNumber">
+      <mat-option
+        [value]="i + 1"
+        *ngFor="let answer of posibleAnswers; let i = index"
+      >
+        {{ answer }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Puntaje</mat-label>
+    <input matInput id="score" formControlName="score" type="number" />
+  </mat-form-field>
+
+  <mat-slide-toggle formControlName="isEnabled">
+    ¿Está habilitada?
+  </mat-slide-toggle>
+  <br />
+  <button
+    mat-flat-button
+    color="primary"
+    type="submit"
+    [disabled]="questionForm.invalid || isLoading"
+  >
+    Agregar pregunta
+    <mat-icon>add</mat-icon>
+  </button>
+</form>
+<div mat-dialog-actions>
+  <button mat-button mat-dialog-close>Close</button>
+</div>

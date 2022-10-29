@@ -1,3 +1,17 @@
+<h1 class="title text-center">Listado de preguntas</h1>
+
+<div class="add-question">
+  <h2 class="text-center">Agregar pregunta</h2>
+  <button
+    mat-fab
+    color="primary"
+    aria-label="Example icon button with a delete icon"
+    (click)="openAddQuestionDialog()"
+  >
+    <mat-icon>add</mat-icon>
+  </button>
+</div>
+
 <table mat-table [dataSource]="questions" class="mat-elevation-z8">
   <ng-container matColumnDef="id">
     <th mat-header-cell *matHeaderCellDef>No.</th>

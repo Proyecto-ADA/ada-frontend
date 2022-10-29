@@ -1,4 +1,6 @@
+import { AddQuestionDialogComponent } from '../../components/add-question-dialog/add-question-dialog.component'
 import { Component, OnInit } from '@angular/core'
+import { MatDialog } from '@angular/material/dialog'
 import { IQuestion } from 'src/app/core/models/question.interface'
 import { QuestionService } from 'src/app/core/services/question.service'
 
@@ -18,7 +20,10 @@ export class AdminPageComponent implements OnInit {
     'answer3',
   ]
 
-  constructor(private questionsService: QuestionService) {}
+  constructor(
+    private questionsService: QuestionService,
+    private dialogService: MatDialog,
+  ) {}
 
   ngOnInit(): void {
     this.getQuestions()
@@ -30,7 +35,10 @@ export class AdminPageComponent implements OnInit {
         ...question,
         id: index + 1,
       }))
-      console.log(this.questions)
     })
+  }
+
+  openAddQuestionDialog() {
+    this.dialogService.open(AddQuestionDialogComponent)
   }
 }
