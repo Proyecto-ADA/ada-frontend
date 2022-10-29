@@ -10,6 +10,8 @@ import { MatSelectModule } from '@angular/material/select'
 import { MatSlideToggleModule } from '@angular/material/slide-toggle'
 import { MatMenuModule } from '@angular/material/menu'
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner'
+import { MatStepperModule } from '@angular/material/stepper'
+import { MatRadioModule } from '@angular/material/radio'
 
 @NgModule({
   declarations: [],
@@ -25,6 +27,8 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner'
     MatSlideToggleModule,
     MatMenuModule,
     MatProgressSpinnerModule,
+    MatStepperModule,
+    MatRadioModule,
   ],
   exports: [
     MatButtonModule,
@@ -37,6 +41,8 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner'
     MatSlideToggleModule,
     MatMenuModule,
     MatProgressSpinnerModule,
+    MatStepperModule,
+    MatRadioModule,
   ],
 })
 export class MaterialModule {}

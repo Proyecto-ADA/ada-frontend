@@ -1,0 +1,17 @@
+<p>quizz-page works!</p>
+<mat-stepper [linear]="false" #stepper>
+  <mat-step *ngFor="let question of questions; let i = index">
+    <h1 class="text-center">Pregunta número {{ i + 1 }}</h1>
+    <h2 class="text-center">
+      {{ question.question }}
+    </h2>
+
+    <p class="text-center">Selecciona la opción que creas correcta:</p>
+
+    <mat-radio-group aria-label="Select an option">
+      <mat-radio-button value="1">{{ question.answer1 }}</mat-radio-button>
+      <mat-radio-button value="2">{{ question.answer2 }}</mat-radio-button>
+      <mat-radio-button value="3">{{ question.answer3 }}</mat-radio-button>
+    </mat-radio-group>
+  </mat-step>
+</mat-stepper>
