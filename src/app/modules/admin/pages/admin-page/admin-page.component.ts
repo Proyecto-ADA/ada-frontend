@@ -19,6 +19,8 @@ export class AdminPageComponent implements OnInit {
     'answer1',
     'answer2',
     'answer3',
+    'score',
+    'isEnabled',
     'acciones',
   ]
 
@@ -52,5 +54,10 @@ export class AdminPageComponent implements OnInit {
   edit(question: IQuestion) {
     const ref = this.dialogService.open(AddQuestionDialogComponent)
     ref.componentInstance.editQuestion = question
+  }
+
+  async changeStatus(question: IQuestion) {
+    question.isEnabled = !question.isEnabled
+    await this.questionsService.update(question.id, question)
   }
 }
