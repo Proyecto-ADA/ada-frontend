@@ -1,3 +1,4 @@
+import { ReactiveFormsModule } from '@angular/forms'
 import { MaterialModule } from './../material/material.module'
 import { NgModule } from '@angular/core'
 import { CommonModule } from '@angular/common'
@@ -7,6 +8,11 @@ import { QuizzPageComponent } from './quizz-page/quizz-page.component'
 
 @NgModule({
   declarations: [QuizzPageComponent],
-  imports: [CommonModule, QuizzRoutingModule, MaterialModule],
+  imports: [
+    CommonModule,
+    QuizzRoutingModule,
+    MaterialModule,
+    ReactiveFormsModule,
+  ],
 })
 export class QuizzModule {}

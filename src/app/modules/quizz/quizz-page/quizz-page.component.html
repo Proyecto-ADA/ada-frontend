@@ -1,17 +1,25 @@
-<p>quizz-page works!</p>
-<mat-stepper [linear]="false" #stepper>
-  <mat-step *ngFor="let question of questions; let i = index">
-    <h1 class="text-center">Pregunta número {{ i + 1 }}</h1>
-    <h2 class="text-center">
-      {{ question.question }}
-    </h2>
+<form [formGroup]="answersForm">
+  <mat-stepper [linear]="false" formArrayName="answers" #stepper>
+    <mat-step *ngFor="let answer of answers.controls; let i = index">
+      <h1 class="text-center">Pregunta número {{ i + 1 }}</h1>
+      <h2 class="text-center">
+        {{ questions[i].question }}
+      </h2>
 
-    <p class="text-center">Selecciona la opción que creas correcta:</p>
+      <p class="text-center">Selecciona la opción que creas correcta:</p>
 
-    <mat-radio-group aria-label="Select an option">
-      <mat-radio-button value="1">{{ question.answer1 }}</mat-radio-button>
-      <mat-radio-button value="2">{{ question.answer2 }}</mat-radio-button>
-      <mat-radio-button value="3">{{ question.answer3 }}</mat-radio-button>
-    </mat-radio-group>
-  </mat-step>
-</mat-stepper>
+      <mat-radio-group aria-label="Select an option" [formControlName]="i">
+        <mat-radio-button [value]="1">
+          {{ questions[i].answer1 }}
+        </mat-radio-button>
+        <mat-radio-button [value]="2">
+          {{ questions[i].answer2 }}
+        </mat-radio-button>
+        <mat-radio-button [value]="3">
+          {{ questions[i].answer3 }}
+        </mat-radio-button>
+      </mat-radio-group>
+    </mat-step>
+  </mat-stepper>
+  <button (click)="send()">Finalizar</button>
+</form>
