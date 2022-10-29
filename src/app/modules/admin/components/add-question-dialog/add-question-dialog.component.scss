@@ -2,7 +2,20 @@ mat-form-field {
   width: 100%;
 }
 
+form > * {
+  display: block;
+  margin: 0 auto;
+}
+
+mat-slide-toggle {
+  width: 50%;
+}
+
+.mat-dialog-actions {
+  justify-content: flex-end;
+}
+
 .error {
-  margin-top: -20px;
+  margin-top: -20px !important;
   color: red;
 }

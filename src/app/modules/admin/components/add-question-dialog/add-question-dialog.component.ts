@@ -1,3 +1,4 @@
+import { MatDialog } from '@angular/material/dialog'
 import { Component, OnInit } from '@angular/core'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { QuestionService } from 'src/app/core/services/question.service'
@@ -14,6 +15,7 @@ export class AddQuestionDialogComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private questionsService: QuestionService,
+    private dialogService: MatDialog,
   ) {
     this.questionForm = fb.group({
       question: ['', [Validators.required, Validators.minLength(20)]],
@@ -67,8 +69,7 @@ export class AddQuestionDialogComponent implements OnInit {
       this.questionForm.value,
     )
 
-    console.log(response)
-
     this.isLoading = false
+    this.dialogService.closeAll()
   }
 }
