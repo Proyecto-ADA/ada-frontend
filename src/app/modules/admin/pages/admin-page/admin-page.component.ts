@@ -48,4 +48,9 @@ export class AdminPageComponent implements OnInit {
     const instance = componentRef.componentInstance as any
     instance.questionId = id
   }
+
+  edit(question: IQuestion) {
+    const ref = this.dialogService.open(AddQuestionDialogComponent)
+    ref.componentInstance.editQuestion = question
+  }
 }

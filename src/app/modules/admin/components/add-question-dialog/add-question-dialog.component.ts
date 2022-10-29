@@ -1,5 +1,6 @@
+import { IQuestion } from 'src/app/core/models/question.interface'
 import { MatDialog } from '@angular/material/dialog'
-import { Component, OnInit } from '@angular/core'
+import { Component, Input, OnInit } from '@angular/core'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { QuestionService } from 'src/app/core/services/question.service'
 
@@ -9,6 +10,7 @@ import { QuestionService } from 'src/app/core/services/question.service'
   styleUrls: ['./add-question-dialog.component.scss'],
 })
 export class AddQuestionDialogComponent implements OnInit {
+  @Input() editQuestion: IQuestion | undefined
   questionForm: FormGroup
   posibleAnswers: string[] = []
   isLoading = false
@@ -29,18 +31,38 @@ export class AddQuestionDialogComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    if (this.editQuestion) {
+      this.intializeForm()
+    }
     this.questionForm.valueChanges.subscribe(() => {
-      this.posibleAnswers = []
-      if (this.answer1?.valid) {
-        this.posibleAnswers = [...this.posibleAnswers, this.answer1.value]
-      }
-      if (this.answer2?.valid) {
-        this.posibleAnswers = [...this.posibleAnswers, this.answer2.value]
-      }
-      if (this.answer3?.valid) {
-        this.posibleAnswers = [...this.posibleAnswers, this.answer3.value]
-      }
+      this.getPosibleAnswers()
     })
+  }
+
+  getPosibleAnswers() {
+    this.posibleAnswers = []
+    if (this.answer1?.valid) {
+      this.posibleAnswers = [...this.posibleAnswers, this.answer1.value]
+    }
+    if (this.answer2?.valid) {
+      this.posibleAnswers = [...this.posibleAnswers, this.answer2.value]
+    }
+    if (this.answer3?.valid) {
+      this.posibleAnswers = [...this.posibleAnswers, this.answer3.value]
+    }
+  }
+
+  intializeForm() {
+    this.questionForm.patchValue({
+      question: this.editQuestion?.question,
+      answer1: this.editQuestion?.answer1,
+      answer2: this.editQuestion?.answer2,
+      answer3: this.editQuestion?.answer3,
+      rightAnswerNumber: this.editQuestion?.rightAnswerNumber,
+      score: this.editQuestion?.score,
+      isEnabled: this.editQuestion?.isEnabled,
+    })
+    this.getPosibleAnswers()
   }
 
   get question() {
