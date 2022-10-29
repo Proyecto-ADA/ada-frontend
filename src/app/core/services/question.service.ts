@@ -25,4 +25,8 @@ export class QuestionService {
   deleteQuestion(id: string) {
     return this.questionsCollection.doc(id).delete()
   }
+
+  update(id: string, question: IQuestion) {
+    return this.questionsCollection.doc(id).update(question)
+  }
 }

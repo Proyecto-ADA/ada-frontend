@@ -73,8 +73,10 @@
     type="submit"
     [disabled]="questionForm.invalid || isLoading"
   >
-    Agregar pregunta
-    <mat-icon>add</mat-icon>
+    {{ !!editQuestion ? 'Editar pregunta' : 'Agregar pregunta' }}
+    <mat-icon>
+      {{ !!editQuestion ? 'edit' : 'add' }}
+    </mat-icon>
   </button>
 </form>
 <div mat-dialog-actions>

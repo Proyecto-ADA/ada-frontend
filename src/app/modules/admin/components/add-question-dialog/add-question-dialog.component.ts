@@ -87,9 +87,14 @@ export class AddQuestionDialogComponent implements OnInit {
     }
     this.isLoading = true
 
-    const response = await this.questionsService.addQuestion(
-      this.questionForm.value,
-    )
+    if (!!this.editQuestion) {
+      await this.questionsService.update(
+        this.editQuestion.id,
+        this.questionForm.value,
+      )
+    } else {
+      await this.questionsService.addQuestion(this.questionForm.value)
+    }
 
     this.isLoading = false
     this.dialogService.closeAll()
