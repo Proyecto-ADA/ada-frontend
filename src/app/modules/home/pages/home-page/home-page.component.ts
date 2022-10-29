@@ -9,16 +9,9 @@ import { LoginFormComponent } from '../../components/login-form/login-form.compo
   styleUrls: ['./home-page.component.scss'],
 })
 export class HomePageComponent implements OnInit {
-  constructor(
-    private dialog: MatDialog,
-    private questionsService: QuestionService,
-  ) {}
+  constructor(private dialog: MatDialog) {}
 
-  ngOnInit(): void {
-    this.questionsService.questions.subscribe((questions) => {
-      console.log('Estas son', questions)
-    })
-  }
+  ngOnInit(): void {}
 
   openDialog() {
     this.dialog.open(LoginFormComponent)

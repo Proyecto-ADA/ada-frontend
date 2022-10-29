@@ -13,10 +13,16 @@ export class QuestionService {
 
   constructor(private afs: AngularFirestore) {
     this.questionsCollection = afs.collection<IQuestion>('questions')
-    this.questions = this.questionsCollection.valueChanges()
+    this.questions = this.questionsCollection.valueChanges({
+      idField: 'id',
+    })
   }
 
   addQuestion(question: IQuestion) {
     return this.questionsCollection.add(question)
+  }
+
+  deleteQuestion(id: string) {
+    return this.questionsCollection.doc(id).delete()
   }
 }

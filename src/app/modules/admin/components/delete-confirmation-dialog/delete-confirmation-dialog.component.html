@@ -1,0 +1,11 @@
+<h1 mat-dialog-title>COnfirmación de eliminación</h1>
+<div mat-dialog-content>
+  <p>¿Quieres elminar la pregunta?</p>
+</div>
+<div mat-dialog-actions>
+  <ng-container *ngIf="!isLoading">
+    <button mat-button>Cancelar</button>
+    <button mat-button (click)="delete()">Eliminar</button>
+  </ng-container>
+  <mat-spinner *ngIf="isLoading"></mat-spinner>
+</div>

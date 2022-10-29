@@ -1,3 +1,4 @@
+import { DeleteConfirmationDialogComponent } from '../../components/delete-confirmation-dialog/delete-confirmation-dialog.component'
 import { AddQuestionDialogComponent } from '../../components/add-question-dialog/add-question-dialog.component'
 import { Component, OnInit } from '@angular/core'
 import { MatDialog } from '@angular/material/dialog'
@@ -10,7 +11,7 @@ import { QuestionService } from 'src/app/core/services/question.service'
   styleUrls: ['./admin-page.component.scss'],
 })
 export class AdminPageComponent implements OnInit {
-  questions: Array<IQuestion & { id: number }> = []
+  questions: IQuestion[] = []
   displayedColumns: string[] = [
     'id',
     'question',
@@ -18,6 +19,7 @@ export class AdminPageComponent implements OnInit {
     'answer1',
     'answer2',
     'answer3',
+    'acciones',
   ]
 
   constructor(
@@ -31,14 +33,19 @@ export class AdminPageComponent implements OnInit {
 
   getQuestions() {
     this.questionsService.questions.subscribe((questions) => {
-      this.questions = questions.map((question, index) => ({
-        ...question,
-        id: index + 1,
-      }))
+      this.questions = questions
     })
   }
 
   openAddQuestionDialog() {
     this.dialogService.open(AddQuestionDialogComponent)
+  }
+
+  delete(id: string) {
+    const componentRef = this.dialogService.open(
+      DeleteConfirmationDialogComponent,
+    )
+    const instance = componentRef.componentInstance as any
+    instance.questionId = id
   }
 }

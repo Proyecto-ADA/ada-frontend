@@ -23,6 +23,5 @@ export class LoginFormComponent implements OnInit {
   async login() {
     const { email, password } = this.loginForm.value
     const response = await this.authService.signUp(email, password)
-    console.log('Se logró', response)
   }
 }
