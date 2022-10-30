@@ -19,7 +19,15 @@
           {{ questions[i].answer3 }}
         </mat-radio-button>
       </mat-radio-group>
+      <div class="buttons__container">
+        <button mat-button matStepperPrevious>Anterior</button>
+        <button mat-button matStepperNext>Siguiente</button>
+      </div>
+      <div class="send__button">
+        <button mat-raised-button color="accent" (click)="send()">
+          Finalizar quizz
+        </button>
+      </div>
     </mat-step>
   </mat-stepper>
-  <button (click)="send()">Finalizar</button>
 </form>

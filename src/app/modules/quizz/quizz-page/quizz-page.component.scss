@@ -8,3 +8,10 @@ mat-radio-group {
     text-transform: capitalize;
   }
 }
+
+.buttons__container,
+.send__button {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20px;
+}
