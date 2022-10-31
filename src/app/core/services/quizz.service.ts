@@ -24,4 +24,8 @@ export class QuizzService {
   addHistory(history: IQuizzHistory) {
     return this.quizzHistoryCollection.add(history)
   }
+
+  getQuizzHistory(id: string) {
+    return this.quizzHistoryCollection.doc(id).get()
+  }
 }
