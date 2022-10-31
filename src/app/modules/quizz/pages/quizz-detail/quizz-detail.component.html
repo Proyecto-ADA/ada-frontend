@@ -1,1 +1,55 @@
-<p>quizz-detail works!</p>
+<mat-spinner *ngIf="isLoading"></mat-spinner>
+
+<div class="container" *ngIf="!isLoading">
+  <h1>Resultados de quizz</h1>
+  <h2>Puntaje total: {{ quizz.score }}</h2>
+  <h3>
+    {{ quizz.rightAnswers }} respuesta(s) correctas de
+    {{ quizz.questions.length }}
+  </h3>
+
+  <mat-accordion>
+    <mat-expansion-panel
+      hideToggle
+      *ngFor="let question of quizz.questions; let i = index"
+    >
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ i + 1 }}) {{ question.question }}</mat-panel-title>
+        <mat-panel-description
+          [ngClass]="{
+            green: isRightAnswer(question, quizz.answers[i]),
+            red: !isRightAnswer(question, quizz.answers[i])
+          }"
+        >
+          <mat-icon
+            aria-hidden="false"
+            aria-label="Example home icon"
+            [fontIcon]="
+              isRightAnswer(question, quizz.answers[i]) ? 'check' : 'close'
+            "
+          ></mat-icon>
+          <b>Respuesta dada:</b>
+          {{ getAnswer(question, quizz.answers[i]) }}
+          -
+          {{
+            isRightAnswer(question, quizz.answers[i]) ? question.score : 0
+          }}
+          puntos
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <div>
+        <h3>
+          Posibles respuestas:
+        </h3>
+        <h4>a) {{ question.answer1 }}</h4>
+        <h4>b) {{ question.answer2 }}</h4>
+        <h4>c) {{ question.answer3 }}</h4>
+
+        <h4 class="score">
+          Puntaje:
+          {{ isRightAnswer(question, quizz.answers[i]) ? question.score : 0 }}
+        </h4>
+      </div>
+    </mat-expansion-panel>
+  </mat-accordion>
+</div>
