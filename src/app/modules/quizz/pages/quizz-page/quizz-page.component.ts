@@ -5,7 +5,7 @@ import { Component, OnInit } from '@angular/core'
 import { QuestionService } from 'src/app/core/services/question.service'
 import { QuizzService } from 'src/app/core/services/quizz.service'
 import { IQuizzHistory } from 'src/app/core/models/quizzHistory.interface'
-import { SendQuizzConfirmationDialogComponent } from '../components/send-quizz-confirmation-dialog/send-quizz-confirmation-dialog.component'
+import { SendQuizzConfirmationDialogComponent } from '../../components/send-quizz-confirmation-dialog/send-quizz-confirmation-dialog.component'
 
 @Component({
   selector: 'app-quizz-page',

@@ -4,12 +4,18 @@ import { NgModule } from '@angular/core'
 import { CommonModule } from '@angular/common'
 
 import { QuizzRoutingModule } from './quizz-routing.module'
-import { QuizzPageComponent } from './quizz-page/quizz-page.component'
-import { SendQuizzConfirmationDialogComponent } from './components/send-quizz-confirmation-dialog/send-quizz-confirmation-dialog.component';
-import { QuizzSendedDialogComponent } from './components/quizz-sended-dialog/quizz-sended-dialog.component'
+import { QuizzPageComponent } from './pages/quizz-page/quizz-page.component'
+import { SendQuizzConfirmationDialogComponent } from './components/send-quizz-confirmation-dialog/send-quizz-confirmation-dialog.component'
+import { QuizzSendedDialogComponent } from './components/quizz-sended-dialog/quizz-sended-dialog.component';
+import { QuizzDetailComponent } from './pages/quizz-detail/quizz-detail.component'
 
 @NgModule({
-  declarations: [QuizzPageComponent, SendQuizzConfirmationDialogComponent, QuizzSendedDialogComponent],
+  declarations: [
+    QuizzPageComponent,
+    SendQuizzConfirmationDialogComponent,
+    QuizzSendedDialogComponent,
+    QuizzDetailComponent,
+  ],
   imports: [
     CommonModule,
     QuizzRoutingModule,

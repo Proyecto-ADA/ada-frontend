@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog'
 import { Component, Input, OnInit, ViewChild } from '@angular/core'
 import { IQuizzHistory } from 'src/app/core/models/quizzHistory.interface'
 import { QuizzService } from 'src/app/core/services/quizz.service'
+import { Router } from '@angular/router'
 
 @Component({
   selector: 'app-send-quizz-confirmation-dialog',
@@ -16,6 +17,7 @@ export class SendQuizzConfirmationDialogComponent implements OnInit {
   constructor(
     private quizzService: QuizzService,
     private dialogService: MatDialog,
+    private router: Router,
   ) {}
 
   ngOnInit(): void {}
@@ -28,8 +30,7 @@ export class SendQuizzConfirmationDialogComponent implements OnInit {
       .open(QuizzSendedDialogComponent)
       .afterClosed()
       .subscribe(() => {
-        console.log('Se ha cerrado el dialog')
-        console.log(response.id)
+        this.router.navigateByUrl(`/quizz/${response.id}`)
       })
   }
 }
