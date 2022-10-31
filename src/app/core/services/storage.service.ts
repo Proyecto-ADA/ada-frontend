@@ -1,7 +1,7 @@
 import { AngularFireStorage } from '@angular/fire/compat/storage'
 import { Injectable } from '@angular/core'
 import { nanoid } from 'nanoid'
-import { from, Observable } from 'rxjs'
+import { from, map, Observable, switchMap } from 'rxjs'
 import { HttpEvent } from '@angular/common/http'
 import { UploadResponse } from '@kolkov/angular-editor'
 
@@ -11,12 +11,22 @@ import { UploadResponse } from '@kolkov/angular-editor'
 export class StorageService {
   constructor(private storage: AngularFireStorage) {}
 
-  uploadImageToFireStorage(path: string, image: File) {
+  uploadImageToFireStorage(path: string, image: File): Observable<any> {
     const imagePath = `${path}/${nanoid(5)}-${image.name}`
+    const reference = this.storage.ref(imagePath)
 
-    return (from(
-      this.storage.upload(imagePath, image),
-    ) as unknown) as Observable<HttpEvent<UploadResponse>>
+    return from(this.storage.upload(imagePath, image)).pipe(
+      switchMap(() => reference.getDownloadURL()),
+      map((url) => {
+        const response = {
+          body: {
+            imageUrl: url,
+          },
+        }
+
+        return response
+      }),
+    )
   }
 
   deleteImageFromFirestore(urlFile: string) {
