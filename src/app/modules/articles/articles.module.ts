@@ -1,3 +1,4 @@
+import { MaterialModule } from './../material/material.module'
 import { ReactiveFormsModule } from '@angular/forms'
 import { NgModule } from '@angular/core'
 import { CommonModule } from '@angular/common'
@@ -13,6 +14,7 @@ import { NewArticlePageComponent } from './pages/new-article-page/new-article-pa
     ArticlesRoutingModule,
     AngularEditorModule,
     ReactiveFormsModule,
+    MaterialModule,
   ],
 })
 export class ArticlesModule {}
