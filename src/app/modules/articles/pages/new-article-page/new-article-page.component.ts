@@ -1,3 +1,4 @@
+import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { Observable, observeOn } from 'rxjs'
 import { Component, OnInit } from '@angular/core'
 import { AngularEditorConfig } from '@kolkov/angular-editor'
@@ -14,7 +15,7 @@ export class NewArticlePageComponent implements OnInit {
     editable: true,
     spellcheck: true,
     height: 'auto',
-    minHeight: '0',
+    minHeight: '250px',
     maxHeight: 'auto',
     width: 'auto',
     minWidth: '0',
@@ -54,10 +55,18 @@ export class NewArticlePageComponent implements OnInit {
     toolbarPosition: 'top',
     toolbarHiddenButtons: [['bold', 'italic'], ['fontSize']],
   }
+
+  newArticleForm: FormGroup
+
   constructor(
     private storageService: StorageService,
     private storage: AngularFireStorage,
-  ) {}
+    private fb: FormBuilder,
+  ) {
+    this.newArticleForm = fb.group({
+      body: fb.control('', [Validators.required]),
+    })
+  }
 
   ngOnInit(): void {}
 }

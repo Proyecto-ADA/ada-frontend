@@ -1,3 +1,4 @@
+import { ReactiveFormsModule } from '@angular/forms'
 import { NgModule } from '@angular/core'
 import { CommonModule } from '@angular/common'
 import { AngularEditorModule } from '@kolkov/angular-editor'
@@ -7,6 +8,11 @@ import { NewArticlePageComponent } from './pages/new-article-page/new-article-pa
 
 @NgModule({
   declarations: [NewArticlePageComponent],
-  imports: [CommonModule, ArticlesRoutingModule, AngularEditorModule],
+  imports: [
+    CommonModule,
+    ArticlesRoutingModule,
+    AngularEditorModule,
+    ReactiveFormsModule,
+  ],
 })
 export class ArticlesModule {}

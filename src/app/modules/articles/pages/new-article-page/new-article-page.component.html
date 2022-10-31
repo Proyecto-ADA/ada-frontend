@@ -1,5 +1,8 @@
 <h1>Crea un nuevo articulo!</h1>
-<angular-editor
-  [placeholder]="'Enter text here...'"
-  [config]="editorConfig"
-></angular-editor>
+<form [formGroup]="newArticleForm">
+  <angular-editor
+    placeholder="Agrega el cuerpo de tu articulo aqui"
+    [config]="editorConfig"
+    formControlName="body"
+  ></angular-editor>
+</form>

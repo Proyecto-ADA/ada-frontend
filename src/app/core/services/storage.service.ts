@@ -2,8 +2,6 @@ import { AngularFireStorage } from '@angular/fire/compat/storage'
 import { Injectable } from '@angular/core'
 import { nanoid } from 'nanoid'
 import { from, map, Observable, switchMap } from 'rxjs'
-import { HttpEvent } from '@angular/common/http'
-import { UploadResponse } from '@kolkov/angular-editor'
 
 @Injectable({
   providedIn: 'root',
