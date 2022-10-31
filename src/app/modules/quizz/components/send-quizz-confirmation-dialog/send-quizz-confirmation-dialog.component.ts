@@ -1,4 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core'
+import { QuizzSendedDialogComponent } from './../quizz-sended-dialog/quizz-sended-dialog.component'
+import { MatDialog } from '@angular/material/dialog'
+import { Component, Input, OnInit, ViewChild } from '@angular/core'
 import { IQuizzHistory } from 'src/app/core/models/quizzHistory.interface'
 import { QuizzService } from 'src/app/core/services/quizz.service'
 
@@ -9,12 +11,25 @@ import { QuizzService } from 'src/app/core/services/quizz.service'
 })
 export class SendQuizzConfirmationDialogComponent implements OnInit {
   @Input() quizzHistory!: IQuizzHistory
-  constructor(private quizzService: QuizzService) {}
+  isLoading = false
+
+  constructor(
+    private quizzService: QuizzService,
+    private dialogService: MatDialog,
+  ) {}
 
   ngOnInit(): void {}
 
   async sendQuizz() {
+    this.isLoading = true
     const response = await this.quizzService.addHistory(this.quizzHistory)
-    console.log(response.id)
+    this.dialogService.closeAll()
+    this.dialogService
+      .open(QuizzSendedDialogComponent)
+      .afterClosed()
+      .subscribe(() => {
+        console.log('Se ha cerrado el dialog')
+        console.log(response.id)
+      })
   }
 }

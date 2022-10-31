@@ -2,9 +2,11 @@
 <div mat-dialog-content>
   ¿Confirmas que deseas envíar el quizz?
 </div>
-<div mat-dialog-actions>
+
+<mat-spinner *ngIf="isLoading"></mat-spinner>
+<div mat-dialog-actions *ngIf="!isLoading">
   <button mat-button mat-dialog-close>No</button>
-  <button mat-button mat-dialog-close cdkFocusInitial (click)="sendQuizz()">
+  <button mat-button cdkFocusInitial (click)="sendQuizz()">
     Sí
   </button>
 </div>
