@@ -32,7 +32,6 @@ export class QuizzDetailComponent implements OnInit {
         if (response.exists) {
           this.quizz = response.data() as IQuizzHistory
         }
-        console.log(this.quizz)
         this.isLoading = false
       })
   }

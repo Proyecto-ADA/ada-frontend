@@ -31,9 +31,7 @@
           <b>Respuesta dada:</b>
           {{ getAnswer(question, quizz.answers[i]) }}
           -
-          {{
-            isRightAnswer(question, quizz.answers[i]) ? question.score : 0
-          }}
+          {{ isRightAnswer(question, quizz.answers[i]) ? question.score : 0 }}
           puntos
         </mat-panel-description>
       </mat-expansion-panel-header>
@@ -52,4 +50,13 @@
       </div>
     </mat-expansion-panel>
   </mat-accordion>
+
+  <button mat-raised-button color="accent" routerLink="/">
+    <mat-icon
+      aria-hidden="false"
+      aria-label="Example home icon"
+      fontIcon="home"
+    ></mat-icon>
+    Volver a página principal
+  </button>
 </div>
