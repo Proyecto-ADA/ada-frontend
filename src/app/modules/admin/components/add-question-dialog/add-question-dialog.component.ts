@@ -11,6 +11,7 @@ import { QuestionService } from 'src/app/core/services/question.service'
 })
 export class AddQuestionDialogComponent implements OnInit {
   @Input() editQuestion: IQuestion | undefined
+  @Input() title = ""
   questionForm: FormGroup
   posibleAnswers: string[] = []
   isLoading = false

@@ -40,7 +40,8 @@ export class AdminPageComponent implements OnInit {
   }
 
   openAddQuestionDialog() {
-    this.dialogService.open(AddQuestionDialogComponent)
+    const ref = this.dialogService.open(AddQuestionDialogComponent)
+    ref.componentInstance.title = 'Agrega una nueva pregunta'
   }
 
   delete(id: string) {
@@ -54,6 +55,7 @@ export class AdminPageComponent implements OnInit {
   edit(question: IQuestion) {
     const ref = this.dialogService.open(AddQuestionDialogComponent)
     ref.componentInstance.editQuestion = question
+    ref.componentInstance.title = 'Editar pregunta'
   }
 
   async changeStatus(question: IQuestion) {
