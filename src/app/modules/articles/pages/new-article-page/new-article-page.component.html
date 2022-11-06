@@ -9,16 +9,19 @@
   <mat-form-field class="example-chip-list" appearance="fill">
     <mat-label>Categorías</mat-label>
     <mat-chip-list #chipList aria-label="Fruit selection">
-      <mat-chip *ngFor="let fruit of fruits" (removed)="remove(fruit)">
-        {{ fruit }}
+      <mat-chip
+        *ngFor="let category of selectedCategories"
+        (removed)="remove(category)"
+      >
+        {{ category }}
         <button matChipRemove>
           <mat-icon>cancel</mat-icon>
         </button>
       </mat-chip>
       <input
-        placeholder="New fruit..."
-        #fruitInput
-        [formControl]="fruitCtrl"
+        placeholder="Escoge las categorias del articulo"
+        #categoriesInput
+        [formControl]="categoriesCtrl"
         [matAutocomplete]="auto"
         [matChipInputFor]="chipList"
         [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
@@ -29,8 +32,11 @@
       #auto="matAutocomplete"
       (optionSelected)="selected($event)"
     >
-      <mat-option *ngFor="let fruit of filteredFruits | async" [value]="fruit">
-        {{ fruit }}
+      <mat-option
+        *ngFor="let category of filteredCategories | async"
+        [value]="category"
+      >
+        {{ category }}
       </mat-option>
     </mat-autocomplete>
   </mat-form-field>

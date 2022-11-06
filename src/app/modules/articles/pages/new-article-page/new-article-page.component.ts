@@ -61,12 +61,12 @@ export class NewArticlePageComponent implements OnInit {
 
   newArticleForm: FormGroup
   separatorKeysCodes: number[] = [ENTER, COMMA]
-  fruitCtrl = new FormControl('')
-  filteredFruits: Observable<string[]>
-  fruits: string[] = []
-  allFruits: string[] = ['Matemáticas', 'Ciencias', 'Ingeniería', 'Tecnología']
+  categoriesCtrl = new FormControl('')
+  filteredCategories: Observable<string[]>
+  selectedCategories: string[] = []
+  categories: string[] = ['Matemáticas', 'Ciencias', 'Ingeniería', 'Tecnología']
 
-  @ViewChild('fruitInput') fruitInput!: ElementRef<HTMLInputElement>
+  @ViewChild('categoriesInput') categoriesInput!: ElementRef<HTMLInputElement>
 
   constructor(
     private storageService: StorageService,
@@ -76,10 +76,10 @@ export class NewArticlePageComponent implements OnInit {
     this.newArticleForm = fb.group({
       body: fb.control('', [Validators.required]),
     })
-    this.filteredFruits = this.fruitCtrl.valueChanges.pipe(
+    this.filteredCategories = this.categoriesCtrl.valueChanges.pipe(
       startWith(null),
       map((fruit: string | null) =>
-        fruit ? this._filter(fruit) : this.allFruits.slice(),
+        fruit ? this._filter(fruit) : this.categories.slice(),
       ),
     )
   }
@@ -91,33 +91,42 @@ export class NewArticlePageComponent implements OnInit {
 
     // Add our fruit
     if (value) {
-      this.fruits.push(value)
+      this.selectedCategories.push(value)
     }
 
     // Clear the input value
     event.chipInput!.clear()
 
-    this.fruitCtrl.setValue(null)
+    this.categoriesCtrl.setValue(null)
   }
 
-  remove(fruit: string): void {
-    const index = this.fruits.indexOf(fruit)
+  remove(category: string): void {
+    const index = this.selectedCategories.indexOf(category)
+    console.log('Passing here', category)
 
     if (index >= 0) {
-      this.fruits.splice(index, 1)
+      this.selectedCategories.splice(index, 1)
     }
+    this.categories = [...this.categories, category]
+    this.categoriesCtrl.setValue(null)
   }
 
   selected(event: MatAutocompleteSelectedEvent): void {
-    this.fruits.push(event.option.viewValue)
-    this.fruitInput.nativeElement.value = ''
-    this.fruitCtrl.setValue(null)
+    const { viewValue } = event.option
+
+    this.categories = this.categories.filter(
+      (category) => category !== viewValue,
+    )
+
+    this.selectedCategories.push(viewValue)
+    this.categoriesInput.nativeElement.value = ''
+    this.categoriesCtrl.setValue(null)
   }
 
   private _filter(value: string): string[] {
     const filterValue = value.toLowerCase()
 
-    return this.allFruits.filter((fruit) =>
+    return this.categories.filter((fruit) =>
       fruit.toLowerCase().includes(filterValue),
     )
   }
