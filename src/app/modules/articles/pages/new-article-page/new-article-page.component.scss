@@ -1,0 +1,26 @@
+form {
+  display: flex;
+  flex-direction: column;
+  max-width: 1400px;
+  margin: 0 auto;
+
+  .example-chip-list {
+    margin-top: 30px;
+  }
+
+  .btn {
+    max-width: 250px;
+    margin: 0 auto;
+    margin-top: 30px;
+  }
+
+  .article__image {
+    margin: 0 auto;
+    max-width: 350px;
+    margin-top: 30px;
+
+    &.loading {
+      filter: blur(5px);
+    }
+  }
+}

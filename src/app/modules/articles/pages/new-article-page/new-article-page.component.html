@@ -1,5 +1,5 @@
-<h1>Crea un nuevo articulo!</h1>
 <form [formGroup]="newArticleForm" (submit)="submitArticle()">
+  <h1>Crea un nuevo articulo!</h1>
   <angular-editor
     placeholder="Agrega el cuerpo de tu articulo aqui"
     [config]="editorConfig"
@@ -40,10 +40,15 @@
       </mat-option>
     </mat-autocomplete>
   </mat-form-field>
-  <br />
 
-  <button type="button" mat-raised-button (click)="fileInput.click()">
-    Agrega una imagen para tu articulo
+  <button
+    class="btn"
+    type="button"
+    mat-raised-button
+    (click)="fileInput.click()"
+  >
+    Agrega una imagen a tu articulo
+    <mat-icon>image</mat-icon>
   </button>
   <input
     (change)="handleFileChange($event)"
@@ -53,9 +58,16 @@
     id="file"
   />
 
-  <img [src]="image" alt="article image" *ngIf="image" />
+  <img
+    [src]="image"
+    class="article__image"
+    [ngClass]="{ loading: !imageUrl }"
+    alt="article image"
+    *ngIf="image"
+  />
 
   <button
+    class="btn"
     mat-raised-button
     color="primary"
     type="submit"
