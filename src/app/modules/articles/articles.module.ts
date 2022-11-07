@@ -5,10 +5,11 @@ import { CommonModule } from '@angular/common'
 import { AngularEditorModule } from '@kolkov/angular-editor'
 
 import { ArticlesRoutingModule } from './articles-routing.module'
-import { NewArticlePageComponent } from './pages/new-article-page/new-article-page.component'
+import { NewArticlePageComponent } from './pages/new-article-page/new-article-page.component';
+import { ArticlePageComponent } from './pages/article-page/article-page.component'
 
 @NgModule({
-  declarations: [NewArticlePageComponent],
+  declarations: [NewArticlePageComponent, ArticlePageComponent],
   imports: [
     CommonModule,
     ArticlesRoutingModule,

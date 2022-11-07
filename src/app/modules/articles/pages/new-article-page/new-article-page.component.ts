@@ -1,3 +1,4 @@
+import { Router } from '@angular/router'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { map, Observable, startWith } from 'rxjs'
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core'
@@ -75,6 +76,7 @@ export class NewArticlePageComponent implements OnInit {
     private storageService: StorageService,
     private fb: FormBuilder,
     private articlesService: ArticlesService,
+    private router: Router,
   ) {
     this.newArticleForm = fb.group({
       body: fb.control('', [Validators.required]),
@@ -170,6 +172,8 @@ export class NewArticlePageComponent implements OnInit {
     }
 
     const response = await this.articlesService.add(article)
-    console.log(response)
+    this.router.navigateByUrl(
+      `/articulos/${response.id}?message=Se ha creado tu articulo con exito, aparecerá en la plataforma una vez que sea aprobado`,
+    )
   }
 }

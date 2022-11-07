@@ -1,11 +1,16 @@
 import { NgModule } from '@angular/core'
 import { RouterModule, Routes } from '@angular/router'
 import { NewArticlePageComponent } from './pages/new-article-page/new-article-page.component'
+import { ArticlePageComponent } from './pages/article-page/article-page.component'
 
 const routes: Routes = [
   {
     path: 'nuevo',
     component: NewArticlePageComponent,
+  },
+  {
+    path: ':id',
+    component: ArticlePageComponent,
   },
 ]
 
