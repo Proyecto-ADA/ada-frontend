@@ -6,6 +6,8 @@ import { StorageService } from 'src/app/core/services/storage.service'
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete'
 import { COMMA, ENTER } from '@angular/cdk/keycodes'
 import { MatChipInputEvent } from '@angular/material/chips'
+import { ArticlesService } from 'src/app/core/services/articles.service'
+import { IArticle } from 'src/app/core/models/article.interface'
 
 @Component({
   selector: 'app-new-article-page',
@@ -68,7 +70,11 @@ export class NewArticlePageComponent implements OnInit {
   image: string | undefined
   imageUrl: string | undefined
 
-  constructor(private storageService: StorageService, private fb: FormBuilder) {
+  constructor(
+    private storageService: StorageService,
+    private fb: FormBuilder,
+    private articlesService: ArticlesService,
+  ) {
     this.newArticleForm = fb.group({
       body: fb.control('', [Validators.required]),
       categories: fb.control(''),
@@ -153,9 +159,15 @@ export class NewArticlePageComponent implements OnInit {
       })
   }
 
-  submitArticle() {
-    console.log(this.newArticleForm.value)
-    console.log(this.imageUrl)
-    console.log(this.selectedCategories)
+  async submitArticle() {
+    const article: IArticle = {
+      body: this.newArticleForm.get('body')?.value,
+      categories: this.selectedCategories,
+      image: this.imageUrl,
+      isPublished: false,
+    }
+
+    const response = await this.articlesService.add(article)
+    console.log(response)
   }
 }
