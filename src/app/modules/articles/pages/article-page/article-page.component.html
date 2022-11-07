@@ -34,9 +34,13 @@
       Aún no hay comentarios
     </h5>
 
-    <div *ngFor="let comment of commentsList">
-      {{ comment.comment }}
-    </div>
+    <mat-card class="comment__card" *ngFor="let comment of commentsList">
+      <mat-card-header>
+        <div mat-card-avatar class="example-header-image"></div>
+        <mat-card-title>Usuario que hizo comentario</mat-card-title>
+        <mat-card-subtitle>{{ comment.comment }}</mat-card-subtitle>
+      </mat-card-header>
+    </mat-card>
 
     <mat-card class="add__comment-card">
       <form (submit)="addComment($event)">

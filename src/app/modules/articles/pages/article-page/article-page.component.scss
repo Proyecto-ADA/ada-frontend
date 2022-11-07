@@ -42,3 +42,9 @@ h4 {
     margin-top: -15px;
   }
 }
+
+.comment__card {
+  mat-card-subtitle {
+    margin-bottom: 0 !important;
+  }
+}
