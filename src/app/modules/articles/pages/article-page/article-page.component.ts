@@ -36,7 +36,6 @@ export class ArticlePageComponent implements OnInit {
       .subscribe((response) => {
         if (response.exists) {
           this.article = response.data()
-          console.log(this.article)
         }
       })
   }

@@ -13,11 +13,17 @@ mat-chip {
   cursor: pointer;
 }
 
-.categories__container {
+.categories__container,
+.comments__container {
   margin-left: 0px;
 }
 
 h4 {
   font-weight: bold;
   margin-bottom: 5px;
+}
+
+.actions__container {
+  display: flex;
+  justify-content: flex-end;
 }

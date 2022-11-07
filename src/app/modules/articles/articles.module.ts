@@ -8,6 +8,8 @@ import { AngularEditorModule } from '@kolkov/angular-editor'
 import { ArticlesRoutingModule } from './articles-routing.module'
 import { NewArticlePageComponent } from './pages/new-article-page/new-article-page.component'
 import { ArticlePageComponent } from './pages/article-page/article-page.component'
+import { ShareButtonModule } from 'ngx-sharebuttons/button'
+import { ShareIconsModule } from 'ngx-sharebuttons/icons'
 
 @NgModule({
   declarations: [
@@ -21,6 +23,8 @@ import { ArticlePageComponent } from './pages/article-page/article-page.componen
     AngularEditorModule,
     ReactiveFormsModule,
     MaterialModule,
+    ShareButtonModule,
+    ShareIconsModule,
   ],
 })
 export class ArticlesModule {}

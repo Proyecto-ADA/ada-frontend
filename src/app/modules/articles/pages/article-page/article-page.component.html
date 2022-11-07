@@ -22,8 +22,16 @@
       </mat-chip>
     </mat-chip-list>
   </mat-card-actions>
-  <mat-card-actions>
-    <button mat-button>LIKE</button>
-    <button mat-button>SHARE</button>
+  <mat-card-actions class="actions__container">
+    <button mat-button>Me gusta</button>
+    <share-button button="facebook"></share-button>
+    <share-button button="twitter"></share-button>
+    <share-button button="telegram"></share-button>
+  </mat-card-actions>
+  <mat-card-actions class="comments__container">
+    <h4>Comentarios ({{ article.comments.length }}):</h4>
+    <h5>
+      Aún no hay comentarios
+    </h5>
   </mat-card-actions>
 </mat-card>
