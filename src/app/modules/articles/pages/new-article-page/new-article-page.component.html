@@ -71,9 +71,12 @@
     mat-raised-button
     color="primary"
     type="submit"
-    [disabled]="newArticleForm.invalid || !imageUrl"
+    [disabled]="newArticleForm.invalid || !imageUrl || isLoading"
   >
-    Crear articulo
-    <mat-icon>add_circle</mat-icon>
+    <ng-container *ngIf="!isLoading">
+      Crear articulo
+      <mat-icon>add_circle</mat-icon>
+    </ng-container>
+    <mat-spinner [diameter]="30" *ngIf="isLoading"></mat-spinner>
   </button>
 </form>

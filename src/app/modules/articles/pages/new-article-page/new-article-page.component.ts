@@ -69,6 +69,7 @@ export class NewArticlePageComponent implements OnInit {
   @ViewChild('categoriesInput') categoriesInput!: ElementRef<HTMLInputElement>
   image: string | undefined
   imageUrl: string | undefined
+  isLoading = false
 
   constructor(
     private storageService: StorageService,
@@ -160,6 +161,7 @@ export class NewArticlePageComponent implements OnInit {
   }
 
   async submitArticle() {
+    this.isLoading = true
     const article: IArticle = {
       body: this.newArticleForm.get('body')?.value,
       categories: this.selectedCategories,
