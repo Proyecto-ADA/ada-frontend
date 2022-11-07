@@ -1,8 +1,9 @@
 import { ActivatedRoute, Params, Router } from '@angular/router'
-import { FormBuilder } from '@angular/forms'
+import { FormBuilder, FormControl } from '@angular/forms'
 import { Component, OnInit } from '@angular/core'
 import { IArticle } from 'src/app/core/models/article.interface'
 import { ArticlesService } from 'src/app/core/services/articles.service'
+import { debounceTime } from 'rxjs'
 
 @Component({
   selector: 'app-articles-list',
@@ -13,6 +14,7 @@ export class ArticlesListComponent implements OnInit {
   allArticles: IArticle[] = []
   articlesToShow: IArticle[] = []
 
+  searchInput = new FormControl('')
   filters = this.fb.group({
     matemáticas: false,
     ingeniería: false,
@@ -34,6 +36,21 @@ export class ArticlesListComponent implements OnInit {
     })
     this.handleFiltersChange()
     this.subscribeToQueryParams()
+    this.subscribeToSearchInput()
+  }
+
+  subscribeToSearchInput() {
+    this.searchInput.valueChanges
+      .pipe(debounceTime(400))
+      .subscribe((changes) => {
+        if (!changes || changes?.length === 0) {
+          this.articlesToShow = [...this.allArticles]
+        } else {
+          this.articlesToShow = this.allArticles.filter(({ title }) =>
+            title.includes(changes),
+          )
+        }
+      })
   }
 
   handleFiltersChange() {

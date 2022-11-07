@@ -25,6 +25,10 @@
   </div>
 
   <div class="filters">
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>¿Búscas algo en especifico?</mat-label>
+      <input matInput autocomplete="off" [formControl]="searchInput" />
+    </mat-form-field>
     <section class="example-section" [formGroup]="filters">
       <h4>Selecciona las categorias que desees filtrar:</h4>
       <p>
