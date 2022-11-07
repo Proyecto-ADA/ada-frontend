@@ -1,9 +1,8 @@
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
+import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { map, Observable, startWith } from 'rxjs'
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core'
 import { AngularEditorConfig } from '@kolkov/angular-editor'
 import { StorageService } from 'src/app/core/services/storage.service'
-import { AngularFireStorage } from '@angular/fire/compat/storage'
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete'
 import { COMMA, ENTER } from '@angular/cdk/keycodes'
 import { MatChipInputEvent } from '@angular/material/chips'
@@ -61,22 +60,20 @@ export class NewArticlePageComponent implements OnInit {
 
   newArticleForm: FormGroup
   separatorKeysCodes: number[] = [ENTER, COMMA]
-  categoriesCtrl = new FormControl('')
   filteredCategories: Observable<string[]>
   selectedCategories: string[] = []
   categories: string[] = ['Matemáticas', 'Ciencias', 'Ingeniería', 'Tecnología']
 
   @ViewChild('categoriesInput') categoriesInput!: ElementRef<HTMLInputElement>
+  image: string | undefined
+  imageUrl: string | undefined
 
-  constructor(
-    private storageService: StorageService,
-    private storage: AngularFireStorage,
-    private fb: FormBuilder,
-  ) {
+  constructor(private storageService: StorageService, private fb: FormBuilder) {
     this.newArticleForm = fb.group({
       body: fb.control('', [Validators.required]),
+      categories: fb.control(''),
     })
-    this.filteredCategories = this.categoriesCtrl.valueChanges.pipe(
+    this.filteredCategories = this.categoriesCtrl!.valueChanges.pipe(
       startWith(null),
       map((fruit: string | null) =>
         fruit ? this._filter(fruit) : this.categories.slice(),
@@ -85,6 +82,10 @@ export class NewArticlePageComponent implements OnInit {
   }
 
   ngOnInit(): void {}
+
+  get categoriesCtrl() {
+    return this.newArticleForm.get('categories')
+  }
 
   add(event: MatChipInputEvent): void {
     const value = (event.value || '').trim()
@@ -97,18 +98,17 @@ export class NewArticlePageComponent implements OnInit {
     // Clear the input value
     event.chipInput!.clear()
 
-    this.categoriesCtrl.setValue(null)
+    this.categoriesCtrl?.setValue(null)
   }
 
   remove(category: string): void {
     const index = this.selectedCategories.indexOf(category)
-    console.log('Passing here', category)
 
     if (index >= 0) {
       this.selectedCategories.splice(index, 1)
     }
     this.categories = [...this.categories, category]
-    this.categoriesCtrl.setValue(null)
+    this.categoriesCtrl?.setValue(null)
   }
 
   selected(event: MatAutocompleteSelectedEvent): void {
@@ -120,7 +120,7 @@ export class NewArticlePageComponent implements OnInit {
 
     this.selectedCategories.push(viewValue)
     this.categoriesInput.nativeElement.value = ''
-    this.categoriesCtrl.setValue(null)
+    this.categoriesCtrl?.setValue(null)
   }
 
   private _filter(value: string): string[] {
@@ -129,5 +129,33 @@ export class NewArticlePageComponent implements OnInit {
     return this.categories.filter((fruit) =>
       fruit.toLowerCase().includes(filterValue),
     )
+  }
+
+  handleFileChange(event: Event) {
+    const target = event.target as HTMLInputElement
+    if (!target.files) {
+      return
+    }
+    const file = target.files[0]
+    if (!file.type.includes('image')) {
+      return
+    }
+
+    const reader = new FileReader()
+    reader.readAsDataURL(file)
+    reader.onload = () => {
+      this.image = reader.result as string
+    }
+    this.storageService
+      .uploadImageToFireStorage('/', file)
+      .subscribe((response) => {
+        this.imageUrl = response.body.imageUrl
+      })
+  }
+
+  submitArticle() {
+    console.log(this.newArticleForm.value)
+    console.log(this.imageUrl)
+    console.log(this.selectedCategories)
   }
 }

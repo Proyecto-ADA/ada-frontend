@@ -1,5 +1,5 @@
 <h1>Crea un nuevo articulo!</h1>
-<form [formGroup]="newArticleForm">
+<form [formGroup]="newArticleForm" (submit)="submitArticle()">
   <angular-editor
     placeholder="Agrega el cuerpo de tu articulo aqui"
     [config]="editorConfig"
@@ -21,7 +21,7 @@
       <input
         placeholder="Escoge las categorias del articulo"
         #categoriesInput
-        [formControl]="categoriesCtrl"
+        formControlName="categories"
         [matAutocomplete]="auto"
         [matChipInputFor]="chipList"
         [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
@@ -40,4 +40,28 @@
       </mat-option>
     </mat-autocomplete>
   </mat-form-field>
+  <br />
+
+  <button type="button" mat-raised-button (click)="fileInput.click()">
+    Agrega una imagen para tu articulo
+  </button>
+  <input
+    (change)="handleFileChange($event)"
+    hidden
+    #fileInput
+    type="file"
+    id="file"
+  />
+
+  <img [src]="image" alt="article image" *ngIf="image" />
+
+  <button
+    mat-raised-button
+    color="primary"
+    type="submit"
+    [disabled]="newArticleForm.invalid || !imageUrl"
+  >
+    Crear articulo
+    <mat-icon>add_circle</mat-icon>
+  </button>
 </form>
