@@ -1,4 +1,5 @@
 .container {
+  position: relative;
   display: flex;
   max-width: 1400px;
   margin: 0 auto;
@@ -16,6 +17,11 @@
     mat-card {
       width: 45%;
     }
+  }
+
+  .filters {
+    position: fixed;
+    right: 50px;
   }
 }
 
