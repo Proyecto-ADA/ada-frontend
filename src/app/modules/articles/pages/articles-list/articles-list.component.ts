@@ -13,6 +13,7 @@ import { debounceTime } from 'rxjs'
 export class ArticlesListComponent implements OnInit {
   allArticles: IArticle[] = []
   articlesToShow: IArticle[] = []
+  selectedCategories: string[] = []
 
   searchInput = new FormControl('')
   filters = this.fb.group({
@@ -33,6 +34,7 @@ export class ArticlesListComponent implements OnInit {
     this.articlesService.articles.subscribe((articles) => {
       this.allArticles = articles.filter(({ isPublished }) => !!isPublished)
       this.articlesToShow = [...this.allArticles]
+      this.getArticlesToShow()
     })
     this.handleFiltersChange()
     this.subscribeToQueryParams()
@@ -64,17 +66,25 @@ export class ArticlesListComponent implements OnInit {
 
   subscribeToQueryParams() {
     this.route.queryParams.subscribe((params) => {
-      const selectedCategories = Object.entries(params)
+      this.selectedCategories = Object.entries(params)
         .filter((element) => element[1] === 'true')
         .map((element) => element[0])
 
-      this.articlesToShow =
-        selectedCategories.length === 0
-          ? [...this.allArticles]
-          : this.allArticles.filter(({ categories }) =>
-              this.filterCategories(categories, selectedCategories),
-            )
+      this.selectedCategories.forEach((c) =>
+        this.filters.get(c)?.patchValue(true),
+      )
+
+      this.getArticlesToShow()
     })
+  }
+
+  getArticlesToShow() {
+    this.articlesToShow =
+      this.selectedCategories.length === 0
+        ? [...this.allArticles]
+        : this.allArticles.filter(({ categories }) =>
+            this.filterCategories(categories, this.selectedCategories),
+          )
   }
 
   filterCategories(categories: string[], selectedCategories: string[]) {
