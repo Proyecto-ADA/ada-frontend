@@ -29,9 +29,42 @@
     <share-button button="telegram"></share-button>
   </mat-card-actions>
   <mat-card-actions class="comments__container">
-    <h4>Comentarios ({{ article.comments.length }}):</h4>
-    <h5>
+    <h4>Comentarios ({{ commentsList.length }}):</h4>
+    <h5 *ngIf="commentsList.length === 0">
       Aún no hay comentarios
     </h5>
+
+    <div *ngFor="let comment of commentsList">
+      {{ comment.comment }}
+    </div>
+
+    <mat-card class="add__comment-card">
+      <form (submit)="addComment($event)">
+        <mat-card-header>
+          <div mat-card-avatar class="example-header-image"></div>
+          <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>Agrega un comentario</mat-label>
+            <input
+              matInput
+              [formControl]="comment"
+              autocomplete="off"
+              #commentInput
+            />
+          </mat-form-field>
+        </mat-card-header>
+        <mat-card-actions>
+          <div class="button__container">
+            <button
+              type="submit"
+              mat-raised-button
+              color="primary"
+              [disabled]="comment.invalid"
+            >
+              Comentar
+            </button>
+          </div>
+        </mat-card-actions>
+      </form>
+    </mat-card>
   </mat-card-actions>
 </mat-card>

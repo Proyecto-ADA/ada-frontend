@@ -25,4 +25,8 @@ export class ArticlesService {
   retrieveArticle(id: string) {
     return this.articlesCollection.doc(id).get()
   }
+
+  update(id: string, article: IArticle) {
+    return this.articlesCollection.doc(id).update(article)
+  }
 }

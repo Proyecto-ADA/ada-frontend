@@ -27,3 +27,18 @@ h4 {
   display: flex;
   justify-content: flex-end;
 }
+
+.add__comment-card mat-card-header {
+  mat-form-field {
+    width: 100%;
+  }
+}
+
+.button__container {
+  display: flex;
+  justify-content: flex-end;
+  button {
+    margin-right: 200px;
+    margin-top: -15px;
+  }
+}
