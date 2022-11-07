@@ -3,4 +3,7 @@ export interface IArticle {
   image: string | undefined
   categories: string[]
   isPublished: boolean
+  user: Object
+  comments: []
+  title: string
 }

@@ -79,6 +79,7 @@ export class NewArticlePageComponent implements OnInit {
     private router: Router,
   ) {
     this.newArticleForm = fb.group({
+      title: fb.control('', [Validators.required]),
       body: fb.control('', [Validators.required]),
       categories: fb.control(''),
     })
@@ -169,6 +170,9 @@ export class NewArticlePageComponent implements OnInit {
       categories: this.selectedCategories,
       image: this.imageUrl,
       isPublished: false,
+      comments: [],
+      user: {},
+      title: this.newArticleForm.get('title')?.value,
     }
 
     const response = await this.articlesService.add(article)

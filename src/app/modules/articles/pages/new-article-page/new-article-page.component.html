@@ -1,5 +1,13 @@
 <form [formGroup]="newArticleForm" (submit)="submitArticle()">
   <h1>Crea un nuevo articulo!</h1>
+  <mat-form-field class="example-full-width" appearance="fill">
+    <mat-label>Título</mat-label>
+    <input
+      matInput
+      placeholder="Escribe el titulo de tu articulo"
+      formControlName="title"
+    />
+  </mat-form-field>
   <angular-editor
     placeholder="Agrega el cuerpo de tu articulo aqui"
     [config]="editorConfig"

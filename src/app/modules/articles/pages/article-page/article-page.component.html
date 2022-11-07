@@ -3,12 +3,12 @@
 <mat-card class="example-card" *ngIf="article">
   <mat-card-header>
     <div mat-card-avatar class="example-header-image"></div>
-    <mat-card-title>Titulo del articulo</mat-card-title>
+    <mat-card-title>{{ article.title }}</mat-card-title>
     <mat-card-subtitle>Por Usuario que publica</mat-card-subtitle>
   </mat-card-header>
   <img mat-card-image [src]="article.image" alt="Photo of a Shiba Inu" />
   <mat-card-content>
-    {{ article.body }}
+    <div [innerHTML]="article.body | sanitizeHtml"></div>
   </mat-card-content>
   <mat-card-actions class="categories__container">
     <h4>Categorias:</h4>
