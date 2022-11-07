@@ -1,7 +1,7 @@
 import { IComment } from './../../../../core/models/comment.interface'
 import { IArticle } from 'src/app/core/models/article.interface'
 import { concatMap, switchMap } from 'rxjs'
-import { ActivatedRoute } from '@angular/router'
+import { ActivatedRoute, Router } from '@angular/router'
 import { Component, ElementRef, OnInit } from '@angular/core'
 import { ArticlesService } from 'src/app/core/services/articles.service'
 import { MatSnackBar } from '@angular/material/snack-bar'
@@ -26,6 +26,7 @@ export class ArticlePageComponent implements OnInit {
     private articlesService: ArticlesService,
     private route: ActivatedRoute,
     private _snackBar: MatSnackBar,
+    private router: Router,
   ) {}
 
   ngOnInit(): void {
@@ -57,6 +58,14 @@ export class ArticlePageComponent implements OnInit {
           }
         }
       })
+  }
+
+  goToArticlesPage(category: string) {
+    this.router.navigate(['/articulos'], {
+      queryParams: {
+        [category.toLowerCase()]: true,
+      },
+    })
   }
 
   async addComment(event: Event) {

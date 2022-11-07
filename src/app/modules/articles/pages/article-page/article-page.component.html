@@ -17,6 +17,7 @@
         *ngFor="let category of article.categories"
         color="accent"
         selected
+        (click)="goToArticlesPage(category)"
       >
         {{ category }}
       </mat-chip>
