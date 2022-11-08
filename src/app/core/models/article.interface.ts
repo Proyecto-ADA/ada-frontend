@@ -1,6 +1,6 @@
 import { IComment } from './comment.interface'
 export interface IArticle {
-  id?: number
+  id?: string
   body: string
   image: string | undefined
   categories: string[]
