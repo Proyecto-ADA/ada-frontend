@@ -5,10 +5,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { HomeRoutingModule } from './home-routing.module'
 import { HomePageComponent } from './pages/home-page/home-page.component'
 import { MaterialModule } from '../material/material.module'
-import { LoginFormComponent } from './components/login-form/login-form.component'
+import { SignUpFormComponent } from './components/signup-form/signup-form.component'
 
 @NgModule({
-  declarations: [HomePageComponent, LoginFormComponent],
+  declarations: [HomePageComponent, SignUpFormComponent],
   imports: [
     CommonModule,
     HomeRoutingModule,

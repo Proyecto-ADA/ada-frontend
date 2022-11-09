@@ -1,0 +1,68 @@
+<h1 mat-dialog-title>Registrate ahora</h1>
+<form [formGroup]="signUpForm" mat-dialog-content>
+  <mat-form-field appearance="fill">
+    <mat-label>Ingresa tu email</mat-label>
+    <input
+      matInput
+      placeholder="nombre@example.com"
+      formControlName="email"
+      autocomplete="off"
+      required
+    />
+  </mat-form-field>
+
+  <p class="error" *ngIf="email?.invalid && (email?.dirty || email?.touched)">
+    Ingresa un correo electrónico válido
+  </p>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Ingresa tu contraseña</mat-label>
+    <input
+      matInput
+      [type]="hide ? 'password' : 'text'"
+      formControlName="password"
+      autocomplete="off"
+    />
+    <button
+      mat-icon-button
+      matSuffix
+      (click)="hide = !hide"
+      [attr.aria-label]="'Hide password'"
+      [attr.aria-pressed]="hide"
+    >
+      <mat-icon>{{ hide ? 'visibility_off' : 'visibility' }}</mat-icon>
+    </button>
+  </mat-form-field>
+
+  <p
+    class="error"
+    *ngIf="password?.invalid && (password?.dirty || password?.touched)"
+  >
+    Ingresa una contraseña de por lo menos 6 caracteres
+  </p>
+
+  <button
+    mat-raised-button
+    color="primary"
+    (click)="signUp()"
+    [disabled]="signUpForm.invalid || isLoading"
+  >
+    <mat-spinner *ngIf="isLoading" [diameter]="20"></mat-spinner>
+    <span *ngIf="!isLoading">
+      Registrate
+    </span>
+  </button>
+
+  <button
+    mat-flat-button
+    (click)="signUpWithGoogle()"
+    [disabled]="isLoading"
+    style="margin-top: 15px;"
+  >
+    <mat-spinner *ngIf="isLoading" [diameter]="20"></mat-spinner>
+    <ng-container *ngIf="!isLoading">
+      <mat-icon style="width: 50px; height: 30px;" svgIcon="logo"></mat-icon>
+      Registrate con Google
+    </ng-container>
+  </button>
+</form>

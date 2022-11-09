@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core'
 import { MatDialog } from '@angular/material/dialog'
 import { QuestionService } from 'src/app/core/services/question.service'
-import { LoginFormComponent } from '../../components/login-form/login-form.component'
+import { SignUpFormComponent } from '../../components/signup-form/signup-form.component'
 
 @Component({
   selector: 'app-home-page',
@@ -14,6 +14,6 @@ export class HomePageComponent implements OnInit {
   ngOnInit(): void {}
 
   openDialog() {
-    this.dialog.open(LoginFormComponent)
+    this.dialog.open(SignUpFormComponent)
   }
 }
