@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core'
 import { MatDialog } from '@angular/material/dialog'
 import { AuthService } from 'src/app/core/services/auth.service'
 import { QuestionService } from 'src/app/core/services/question.service'
-import { SignUpFormComponent } from '../../components/signup-form/signup-form.component'
+import { SignUpLoginFormComponent } from '../../components/signup-login-form/signup-login-form.component'
 
 @Component({
   selector: 'app-home-page',
@@ -19,11 +19,11 @@ export class HomePageComponent implements OnInit {
   }
 
   openSignUpDialog() {
-    this.dialog.open(SignUpFormComponent)
+    this.dialog.open(SignUpLoginFormComponent)
   }
 
   openLoginDialog() {
-    const dialogRef = this.dialog.open(SignUpFormComponent)
+    const dialogRef = this.dialog.open(SignUpLoginFormComponent)
     dialogRef.componentInstance.title = 'Inicia sesión'
     dialogRef.componentInstance.type = 'login'
   }

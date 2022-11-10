@@ -1,6 +1,6 @@
-import { CompleteProfileComponent } from './../complete-profile/complete-profile.component'
+import { CompleteProfileComponent } from '../complete-profile/complete-profile.component'
 import { MatDialog } from '@angular/material/dialog'
-import { IUser } from './../../../../core/models/user.interface'
+import { IUser } from '../../../../core/models/user.interface'
 import { Component, Input, OnInit } from '@angular/core'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { UsersService } from 'src/app/core/services/users.service'
@@ -13,10 +13,10 @@ const googleLogoURL =
 
 @Component({
   selector: 'app-signup-form',
-  templateUrl: './signup-form.component.html',
-  styleUrls: ['./signup-form.component.scss'],
+  templateUrl: './signup-login-form.component.html',
+  styleUrls: ['./signup-login-form.component.scss'],
 })
-export class SignUpFormComponent implements OnInit {
+export class SignUpLoginFormComponent implements OnInit {
   @Input() type: 'signUp' | 'login' = 'signUp'
   @Input() title = 'Registrate ahora'
   hide = true
