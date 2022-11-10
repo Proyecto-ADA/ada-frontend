@@ -1,5 +1,9 @@
 import { NgModule } from '@angular/core'
 import { RouterModule, Routes } from '@angular/router'
+import {
+  AngularFireAuthGuard,
+  redirectUnauthorizedTo,
+} from '@angular/fire/compat/auth-guard'
 
 const routes: Routes = [
   {
@@ -11,11 +15,19 @@ const routes: Routes = [
     path: 'admin',
     loadChildren: () =>
       import('./modules/admin/admin.module').then((m) => m.AdminModule),
+    canActivate: [AngularFireAuthGuard],
+    data: {
+      authGuardPipe: () => redirectUnauthorizedTo(['/']),
+    },
   },
   {
     path: 'quizz',
     loadChildren: () =>
       import('./modules/quizz/quizz.module').then((m) => m.QuizzModule),
+    canActivate: [AngularFireAuthGuard],
+    data: {
+      authGuardPipe: () => redirectUnauthorizedTo(['/']),
+    },
   },
   {
     path: 'articulos',
