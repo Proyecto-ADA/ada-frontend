@@ -1,3 +1,4 @@
+import { IUser } from './user.interface'
 import { IComment } from './comment.interface'
 export interface IArticle {
   id?: string
@@ -5,7 +6,7 @@ export interface IArticle {
   image: string | undefined
   categories: string[]
   isPublished: boolean
-  user: Object
+  user: IUser
   comments: IComment[]
   title: string
 }

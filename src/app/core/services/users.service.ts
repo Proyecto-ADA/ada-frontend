@@ -27,4 +27,8 @@ export class UsersService {
   update(id: string, user: IUser) {
     return this.usersCollection.doc(id).update(user)
   }
+
+  findByUid(uid: string) {
+    return this.usersCollection.ref.where('uid', '==', uid).get()
+  }
 }

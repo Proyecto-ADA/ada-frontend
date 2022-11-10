@@ -1,6 +1,7 @@
+import { AuthService } from './../../../../core/services/auth.service'
 import { Router } from '@angular/router'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
-import { map, Observable, startWith } from 'rxjs'
+import { map, Observable, startWith, switchMap } from 'rxjs'
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core'
 import { AngularEditorConfig } from '@kolkov/angular-editor'
 import { StorageService } from 'src/app/core/services/storage.service'
@@ -9,6 +10,8 @@ import { COMMA, ENTER } from '@angular/cdk/keycodes'
 import { MatChipInputEvent } from '@angular/material/chips'
 import { ArticlesService } from 'src/app/core/services/articles.service'
 import { IArticle } from 'src/app/core/models/article.interface'
+import { UsersService } from 'src/app/core/services/users.service'
+import { IUser } from 'src/app/core/models/user.interface'
 
 @Component({
   selector: 'app-new-article-page',
@@ -71,14 +74,17 @@ export class NewArticlePageComponent implements OnInit {
   image: string | undefined
   imageUrl: string | undefined
   isLoading = false
+  user!: IUser
 
   constructor(
     private storageService: StorageService,
     private fb: FormBuilder,
     private articlesService: ArticlesService,
     private router: Router,
+    private authService: AuthService,
+    private usersService: UsersService,
   ) {
-    this.newArticleForm = fb.group({
+    this.newArticleForm = this.fb.group({
       title: fb.control('', [Validators.required]),
       body: fb.control('', [Validators.required]),
       categories: fb.control(''),
@@ -91,7 +97,12 @@ export class NewArticlePageComponent implements OnInit {
     )
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.authService.isLoggedIn().subscribe(async (user) => {
+      const response = await this.usersService.findByUid(user!.uid)
+      this.user = response.docs[0].data()
+    })
+  }
 
   get categoriesCtrl() {
     return this.newArticleForm.get('categories')
@@ -171,7 +182,7 @@ export class NewArticlePageComponent implements OnInit {
       image: this.imageUrl,
       isPublished: false,
       comments: [],
-      user: {},
+      user: this.user,
       title: this.newArticleForm.get('title')?.value,
     }
 

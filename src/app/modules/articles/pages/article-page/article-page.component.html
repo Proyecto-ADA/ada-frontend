@@ -2,9 +2,15 @@
 
 <mat-card class="example-card" *ngIf="article">
   <mat-card-header>
-    <div mat-card-avatar class="example-header-image"></div>
+    <div
+      mat-card-avatar
+      class="example-header-image"
+      [style]="'background-image: url(' + article.user.profileImage + ')'"
+    ></div>
     <mat-card-title>{{ article.title }}</mat-card-title>
-    <mat-card-subtitle>Por Usuario que publica</mat-card-subtitle>
+    <mat-card-subtitle>
+      Por {{ article.user.firstName }} {{ article.user.lastName }}
+    </mat-card-subtitle>
   </mat-card-header>
   <img mat-card-image [src]="article.image" alt="Photo of a Shiba Inu" />
   <mat-card-content>

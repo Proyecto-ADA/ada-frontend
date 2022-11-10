@@ -53,6 +53,8 @@ export class ArticlePageComponent implements OnInit {
         if (response.exists) {
           this.article = response.data()
 
+          console.log(this.article)
+
           if (this.article) {
             this.commentsList = [...this.article.comments]
           }
