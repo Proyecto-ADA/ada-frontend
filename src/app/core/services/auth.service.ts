@@ -12,7 +12,7 @@ export class AuthService {
     return this.afAuth.createUserWithEmailAndPassword(email, password)
   }
 
-  signUpWithGoogle() {
+  signInWithGoogle() {
     return this.afAuth.signInWithPopup(new GoogleAuthProvider())
   }
 

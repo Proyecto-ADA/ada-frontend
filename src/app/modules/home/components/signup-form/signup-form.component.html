@@ -1,4 +1,4 @@
-<h1 mat-dialog-title>Registrate ahora</h1>
+<h1 mat-dialog-title>{{ title }}</h1>
 <form [formGroup]="signUpForm" mat-dialog-content>
   <mat-form-field appearance="fill">
     <mat-label>Ingresa tu email</mat-label>
@@ -44,7 +44,7 @@
   <button
     mat-raised-button
     color="primary"
-    (click)="signUp()"
+    (click)="type === 'signUp' ? signUp() : signIn()"
     [disabled]="signUpForm.invalid || isLoading"
   >
     <mat-spinner *ngIf="isLoading" [diameter]="20"></mat-spinner>

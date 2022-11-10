@@ -1,7 +1,7 @@
 import { CompleteProfileComponent } from './../complete-profile/complete-profile.component'
 import { MatDialog } from '@angular/material/dialog'
 import { IUser } from './../../../../core/models/user.interface'
-import { Component, OnInit } from '@angular/core'
+import { Component, Input, OnInit } from '@angular/core'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { UsersService } from 'src/app/core/services/users.service'
 import { AuthService } from '../../../../core/services/auth.service'
@@ -17,6 +17,8 @@ const googleLogoURL =
   styleUrls: ['./signup-form.component.scss'],
 })
 export class SignUpFormComponent implements OnInit {
+  @Input() type: 'signUp' | 'login' = 'signUp'
+  @Input() title = 'Registrate ahora'
   hide = true
 
   signUpForm: FormGroup
@@ -51,14 +53,18 @@ export class SignUpFormComponent implements OnInit {
     await this.createUser(response.user?.uid, this.email?.value)
   }
 
-  async signUpWithGoogle() {
-    const response = await this.authService.signUpWithGoogle()
+  signIn() {}
 
-    await this.createUser(
-      response.user?.uid,
-      response.user!.email!,
-      response.user!.photoURL!,
-    )
+  async signUpWithGoogle() {
+    const response = await this.authService.signInWithGoogle()
+
+    if (this.type === 'signUp') {
+      await this.createUser(
+        response.user?.uid,
+        response.user!.email!,
+        response.user!.photoURL!,
+      )
+    }
   }
 
   async createUser(
