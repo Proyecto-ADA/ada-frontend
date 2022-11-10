@@ -49,7 +49,7 @@
   >
     <mat-spinner *ngIf="isLoading" [diameter]="20"></mat-spinner>
     <span *ngIf="!isLoading">
-      Registrate
+      {{ type === 'signUp' ? 'Registrate' : 'Inicia sesión' }}
     </span>
   </button>
 
@@ -62,7 +62,8 @@
     <mat-spinner *ngIf="isLoading" [diameter]="20"></mat-spinner>
     <ng-container *ngIf="!isLoading">
       <mat-icon style="width: 50px; height: 30px;" svgIcon="logo"></mat-icon>
-      Registrate con Google
+      {{ type === 'signUp' ? 'Registrate' : 'Inicia sesión' }}
+      con Google
     </ng-container>
   </button>
 </form>

@@ -18,8 +18,14 @@ export class HomePageComponent implements OnInit {
     })
   }
 
-  openDialog() {
+  openSignUpDialog() {
     this.dialog.open(SignUpFormComponent)
+  }
+
+  openLoginDialog() {
+    const dialogRef = this.dialog.open(SignUpFormComponent)
+    dialogRef.componentInstance.title = 'Inicia sesión'
+    dialogRef.componentInstance.type = 'login'
   }
 
   async signOut() {

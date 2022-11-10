@@ -53,11 +53,16 @@ export class SignUpFormComponent implements OnInit {
     await this.createUser(response.user?.uid, this.email?.value)
   }
 
-  signIn() {}
+  async signIn() {
+    this.isLoading = true
+    await this.authService.signIn(this.email?.value, this.password?.value)
+    this.dialogService.closeAll()
+  }
 
   async signUpWithGoogle() {
     const response = await this.authService.signInWithGoogle()
 
+    this.dialogService.closeAll()
     if (this.type === 'signUp') {
       await this.createUser(
         response.user?.uid,
