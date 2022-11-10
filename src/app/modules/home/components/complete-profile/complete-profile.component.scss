@@ -1,0 +1,21 @@
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+.avatar {
+  width: 80px;
+  height: 80px;
+  display: block;
+  margin: 0 auto;
+  img {
+    width: 100%;
+    border-radius: 50%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+.avatar__input {
+  margin: 20px auto;
+}

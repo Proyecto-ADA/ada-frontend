@@ -1,0 +1,53 @@
+<h1 mat-dialog-title>Completa tu perfil</h1>
+<form mat-dialog-content [formGroup]="profileForm">
+  <div class="avatar">
+    <img [src]="image" alt="User profile image" />
+  </div>
+
+  <div class="avatar__input">
+    <button type="button" mat-raised-button (click)="fileInput.click()">
+      Cambiar foto de perfil
+    </button>
+    <input
+      (change)="handleFileChange($event)"
+      hidden
+      #fileInput
+      type="file"
+      id="file"
+    />
+  </div>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Ingresa tu(s) nombre(s)</mat-label>
+    <input
+      matInput
+      placeholder="Tu nombre"
+      autocomplete="off"
+      required
+      formControlName="firstName"
+    />
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Ingresa tus apellidos</mat-label>
+    <input
+      matInput
+      placeholder="Apellidos"
+      autocomplete="off"
+      required
+      formControlName="lastName"
+    />
+  </mat-form-field>
+
+  <button
+    mat-raised-button
+    color="primary"
+    [disabled]="isLoading || profileForm.invalid"
+    (click)="completeProfile()"
+  >
+    <mat-spinner *ngIf="isLoading" [diameter]="20"></mat-spinner>
+    <span *ngIf="!isLoading">
+      Completa tu perfil
+    </span>
+  </button>
+</form>

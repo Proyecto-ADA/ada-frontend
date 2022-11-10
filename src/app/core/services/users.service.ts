@@ -23,4 +23,8 @@ export class UsersService {
   add(user: IUser) {
     return this.usersCollection.add(user)
   }
+
+  update(id: string, user: IUser) {
+    return this.usersCollection.doc(id).update(user)
+  }
 }

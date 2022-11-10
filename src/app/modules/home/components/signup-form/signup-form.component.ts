@@ -1,3 +1,5 @@
+import { CompleteProfileComponent } from './../complete-profile/complete-profile.component'
+import { MatDialog } from '@angular/material/dialog'
 import { IUser } from './../../../../core/models/user.interface'
 import { Component, OnInit } from '@angular/core'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
@@ -25,6 +27,7 @@ export class SignUpFormComponent implements OnInit {
     private usersService: UsersService,
     private matIconRegistry: MatIconRegistry,
     private domSanitizer: DomSanitizer,
+    private dialogService: MatDialog,
   ) {
     this.matIconRegistry.addSvgIcon(
       'logo',
@@ -58,7 +61,11 @@ export class SignUpFormComponent implements OnInit {
     )
   }
 
-  async createUser(uid: string | undefined, email: string, photoURL = '') {
+  async createUser(
+    uid: string | undefined,
+    email: string,
+    photoURL = 'http://cdn.onlinewebfonts.com/svg/img_561543.png',
+  ) {
     const user: IUser = {
       email,
       uid,
@@ -68,7 +75,16 @@ export class SignUpFormComponent implements OnInit {
     }
 
     const newUser = await this.usersService.add(user)
-    console.log(newUser)
+    this.dialogService.closeAll()
+    const completeProfileComponent = this.dialogService.open(
+      CompleteProfileComponent,
+      {
+        disableClose: true,
+      },
+    )
+
+    completeProfileComponent.componentInstance.user = user
+    completeProfileComponent.componentInstance.userId = newUser.id
   }
 
   get email() {
