@@ -50,16 +50,21 @@ export class SignUpFormComponent implements OnInit {
 
   async signUpWithGoogle() {
     const response = await this.authService.signUpWithGoogle()
-    await this.createUser(response.user?.uid, response.user!.email!)
+
+    await this.createUser(
+      response.user?.uid,
+      response.user!.email!,
+      response.user!.photoURL!,
+    )
   }
 
-  async createUser(uid: string | undefined, email: string) {
+  async createUser(uid: string | undefined, email: string, photoURL = '') {
     const user: IUser = {
       email,
       uid,
       firstName: '',
       lastName: '',
-      profileImage: '',
+      profileImage: photoURL,
     }
 
     const newUser = await this.usersService.add(user)
