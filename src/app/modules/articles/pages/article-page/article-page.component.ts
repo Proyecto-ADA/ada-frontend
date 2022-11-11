@@ -1,3 +1,6 @@
+import { MatDialog } from '@angular/material/dialog'
+import { SignUpLoginFormComponent } from './../../../home/components/signup-login-form/signup-login-form.component'
+import { IUser } from './../../../../core/models/user.interface'
 import { IComment } from './../../../../core/models/comment.interface'
 import { IArticle } from 'src/app/core/models/article.interface'
 import { concatMap, switchMap } from 'rxjs'
@@ -7,6 +10,8 @@ import { ArticlesService } from 'src/app/core/services/articles.service'
 import { MatSnackBar } from '@angular/material/snack-bar'
 import { FormControl, Validators } from '@angular/forms'
 import { ViewChild } from '@angular/core'
+import { AuthService } from 'src/app/core/services/auth.service'
+import { UsersService } from 'src/app/core/services/users.service'
 
 @Component({
   selector: 'app-article-page',
@@ -18,6 +23,7 @@ export class ArticlePageComponent implements OnInit {
   message: string | undefined
   article: IArticle | undefined
   articleId: string | undefined
+  user!: IUser
 
   comment = new FormControl('', [Validators.required])
   commentsList: IComment[] = []
@@ -27,6 +33,9 @@ export class ArticlePageComponent implements OnInit {
     private route: ActivatedRoute,
     private _snackBar: MatSnackBar,
     private router: Router,
+    private authService: AuthService,
+    private usersService: UsersService,
+    private dialog: MatDialog,
   ) {}
 
   ngOnInit(): void {
@@ -53,13 +62,33 @@ export class ArticlePageComponent implements OnInit {
         if (response.exists) {
           this.article = response.data()
 
-          console.log(this.article)
-
           if (this.article) {
             this.commentsList = [...this.article.comments]
           }
         }
       })
+
+    this.getLoggedUser()
+  }
+
+  async addToLikes() {
+    this.user.likedArticles = [...this.user.likedArticles, this.articleId!]
+    await this.usersService.update(this.user!.id!, this.user)
+  }
+
+  async removeFromLikes() {
+    this.user.likedArticles = this.user.likedArticles.filter(
+      (article) => article !== this.articleId,
+    )
+    await this.usersService.update(this.user!.id!, this.user)
+  }
+
+  getLoggedUser() {
+    this.authService.isLoggedIn().subscribe(async (user) => {
+      const response = await this.usersService.findByUid(user!.uid)
+      this.user = response.docs[0].data()
+      this.user.id = response.docs[0].id
+    })
   }
 
   goToArticlesPage(category: string) {
@@ -76,7 +105,7 @@ export class ArticlePageComponent implements OnInit {
       return
     }
     const comment: IComment = {
-      user: {},
+      user: this.user,
       comment: this.comment.value || '',
     }
     this.article.comments = [...this.article.comments, comment]
@@ -84,5 +113,10 @@ export class ArticlePageComponent implements OnInit {
     await this.articlesService.update(this.articleId, this.article)
     this.commentsList = [...this.commentsList, comment]
     this.commentInput.nativeElement.value = ''
+  }
+  openLoginDialog() {
+    const dialogRef = this.dialog.open(SignUpLoginFormComponent)
+    dialogRef.componentInstance.title = 'Inicia sesión'
+    dialogRef.componentInstance.type = 'login'
   }
 }

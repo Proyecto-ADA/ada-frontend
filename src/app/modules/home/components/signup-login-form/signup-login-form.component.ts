@@ -83,6 +83,7 @@ export class SignUpLoginFormComponent implements OnInit {
       firstName: '',
       lastName: '',
       profileImage: photoURL,
+      likedArticles: [],
     }
 
     const newUser = await this.usersService.add(user)

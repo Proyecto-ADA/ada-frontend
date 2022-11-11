@@ -1,4 +1,5 @@
+import { IUser } from './user.interface'
 export interface IComment {
-  user: Object
+  user: IUser
   comment: string
 }

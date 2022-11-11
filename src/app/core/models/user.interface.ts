@@ -5,4 +5,5 @@ export interface IUser {
   profileImage: string
   firstName: string
   lastName: string
+  likedArticles: string[]
 }

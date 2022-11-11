@@ -30,7 +30,20 @@
     </mat-chip-list>
   </mat-card-actions>
   <mat-card-actions class="actions__container">
-    <button mat-button>Me gusta</button>
+    <button
+      mat-button
+      *ngIf="user && !user.likedArticles.includes(articleId!)"
+      (click)="addToLikes()"
+    >
+      Me gusta
+    </button>
+    <button
+      mat-button
+      *ngIf="user && user.likedArticles.includes(articleId!)"
+      (click)="removeFromLikes()"
+    >
+      Ya no me gusta
+    </button>
     <share-button button="facebook"></share-button>
     <share-button button="twitter"></share-button>
     <share-button button="telegram"></share-button>
@@ -43,13 +56,19 @@
 
     <mat-card class="comment__card" *ngFor="let comment of commentsList">
       <mat-card-header>
-        <div mat-card-avatar class="example-header-image"></div>
-        <mat-card-title>Usuario que hizo comentario</mat-card-title>
+        <div
+          mat-card-avatar
+          class="example-header-image"
+          [style]="'background-image: url(' + comment.user.profileImage + ')'"
+        ></div>
+        <mat-card-title>
+          {{ comment.user.firstName }} {{ comment.user.lastName }}
+        </mat-card-title>
         <mat-card-subtitle>{{ comment.comment }}</mat-card-subtitle>
       </mat-card-header>
     </mat-card>
 
-    <mat-card class="add__comment-card">
+    <mat-card class="add__comment-card" *ngIf="user">
       <form (submit)="addComment($event)">
         <mat-card-header>
           <mat-form-field class="example-full-width" appearance="fill">
@@ -76,5 +95,15 @@
         </mat-card-actions>
       </form>
     </mat-card>
+
+    <button
+      mat-raised-button
+      color="primary"
+      class="login-button"
+      (click)="openLoginDialog()"
+      *ngIf="!user"
+    >
+      Inicia sesión para comentar
+    </button>
   </mat-card-actions>
 </mat-card>
