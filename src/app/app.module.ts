@@ -9,6 +9,11 @@ import { AngularFireAuthModule } from '@angular/fire/compat/auth'
 import { environment } from '../environments/environment'
 import { HttpClientModule } from '@angular/common/http'
 import { AngularFireStorageModule } from '@angular/fire/compat/storage'
+import {MatToolbarModule} from '@angular/material/toolbar';
+import { MatIconModule } from '@angular/material/icon'
+import { MatMenuModule } from '@angular/material/menu'
+import { MatButtonModule } from '@angular/material/button'
+
 
 @NgModule({
   declarations: [AppComponent],
@@ -20,6 +25,10 @@ import { AngularFireStorageModule } from '@angular/fire/compat/storage'
     AngularFireStorageModule,
     AngularFireAuthModule,
     HttpClientModule,
+    MatToolbarModule,
+    MatIconModule,
+    MatMenuModule,
+    MatButtonModule
   ],
   providers: [],
   bootstrap: [AppComponent],
