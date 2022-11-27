@@ -19,6 +19,12 @@
         </ng-container>
         
         <ng-container *ngIf="user">
+            <button mat-menu-item  routerLink="/quizz">
+                <mat-icon>
+                  psychology_alt
+                </mat-icon>
+                <span>Hacer quizz</span>
+            </button>
             <button mat-menu-item (click)="signOut()">
                 <mat-icon>logout</mat-icon>
                 <span>Cerrar sesión</span>
