@@ -1,0 +1,16 @@
+<mat-card class="example-card" *ngIf="user">
+  <mat-card-header>
+    <mat-card-title-group>
+      <mat-card-title>{{ user.firstName }} {{ user.lastName }}</mat-card-title>
+      <mat-card-subtitle>{{ user.email }}</mat-card-subtitle>
+      <img mat-card-sm-image [src]="user.profileImage" />
+    </mat-card-title-group>
+  </mat-card-header>
+  <mat-card-content>
+    <mat-tab-group>
+      <mat-tab label="Mis articulos">Content 1</mat-tab>
+      <mat-tab label="Mis favoritos">Content 2</mat-tab>
+      <mat-tab label="Mis quizzes">Content 3</mat-tab>
+    </mat-tab-group>
+  </mat-card-content>
+</mat-card>

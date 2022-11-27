@@ -19,8 +19,8 @@ import { MatCardModule } from '@angular/material/card'
 import { MatSnackBarModule } from '@angular/material/snack-bar'
 import { MatGridListModule } from '@angular/material/grid-list'
 import { MatCheckboxModule } from '@angular/material/checkbox'
-import {MatToolbarModule} from '@angular/material/toolbar';
-
+import { MatToolbarModule } from '@angular/material/toolbar'
+import { MatTabsModule } from '@angular/material/tabs'
 
 @NgModule({
   declarations: [],
@@ -45,7 +45,8 @@ import {MatToolbarModule} from '@angular/material/toolbar';
     MatCardModule,
     MatGridListModule,
     MatCheckboxModule,
-    MatToolbarModule
+    MatToolbarModule,
+    MatTabsModule,
   ],
   exports: [
     MatButtonModule,
@@ -64,10 +65,11 @@ import {MatToolbarModule} from '@angular/material/toolbar';
     MatChipsModule,
     MatAutocompleteModule,
     MatSnackBarModule,
+    MatTabsModule,
     MatCardModule,
     MatGridListModule,
     MatCheckboxModule,
-    MatToolbarModule
+    MatToolbarModule,
   ],
 })
 export class MaterialModule {}

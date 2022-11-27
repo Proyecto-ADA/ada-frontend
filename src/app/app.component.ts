@@ -1,3 +1,4 @@
+import { Router } from '@angular/router'
 import { Component, OnInit } from '@angular/core'
 import { MatDialog } from '@angular/material/dialog'
 import { MatSnackBar } from '@angular/material/snack-bar'
@@ -14,23 +15,29 @@ export class AppComponent implements OnInit {
   title = 'Proyecto Ada'
   user!: any
 
-  constructor(private titleService: Title, private authService: AuthService, private dialog: MatDialog, private _snackBar: MatSnackBar) {
+  constructor(
+    private titleService: Title,
+    private authService: AuthService,
+    private dialog: MatDialog,
+    private _snackBar: MatSnackBar,
+    private router: Router,
+  ) {
     this.titleService.setTitle(this.title)
   }
 
   ngOnInit(): void {
-    this.authService.isLoggedIn().subscribe(user => {
+    this.authService.isLoggedIn().subscribe((user) => {
       this.user = user
-      if(this.user) {
+      if (this.user) {
         this.openSnackBar()
       }
     })
   }
 
   openSnackBar() {
-    this._snackBar.open("Has iniciado sesión", "", {
+    this._snackBar.open('Has iniciado sesión', '', {
       duration: 3 * 1000,
-    });
+    })
   }
 
   openSignUpDialog() {
@@ -45,5 +52,6 @@ export class AppComponent implements OnInit {
 
   async signOut() {
     await this.authService.signOut()
+    this.router.navigateByUrl('/')
   }
 }

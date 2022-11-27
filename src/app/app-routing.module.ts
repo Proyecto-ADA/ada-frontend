@@ -36,6 +36,11 @@ const routes: Routes = [
         (m) => m.ArticlesModule,
       ),
   },
+  {
+    path: 'perfil',
+    loadChildren: () =>
+      import('./modules/profile/profile.module').then((m) => m.ProfileModule),
+  },
 ]
 
 @NgModule({
