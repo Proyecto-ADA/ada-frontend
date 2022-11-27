@@ -28,5 +28,6 @@ import { ArticlesListComponent } from './pages/articles-list/articles-list.compo
     ShareButtonModule,
     ShareIconsModule,
   ],
+  exports: [ArticlesListComponent]
 })
 export class ArticlesModule {}

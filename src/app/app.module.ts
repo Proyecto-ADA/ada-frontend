@@ -13,6 +13,9 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon'
 import { MatMenuModule } from '@angular/material/menu'
 import { MatButtonModule } from '@angular/material/button'
+import { MatDialogModule } from '@angular/material/dialog'
+import { ReactiveFormsModule } from '@angular/forms'
+import {  MatSnackBarModule } from '@angular/material/snack-bar'
 
 
 @NgModule({
@@ -28,7 +31,10 @@ import { MatButtonModule } from '@angular/material/button'
     MatToolbarModule,
     MatIconModule,
     MatMenuModule,
-    MatButtonModule
+    MatButtonModule,
+    MatDialogModule,
+    ReactiveFormsModule,
+    MatSnackBarModule
   ],
   providers: [],
   bootstrap: [AppComponent],

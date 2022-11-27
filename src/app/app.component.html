@@ -8,18 +8,18 @@
      
       <mat-menu #menu="matMenu">
         <ng-container *ngIf="!user">
-            <button mat-menu-item>
+            <button mat-menu-item (click)="openLoginDialog()">
                 <mat-icon>login</mat-icon>
                 <span>Iniciar sesión</span>
               </button>
-              <button mat-menu-item>
+              <button mat-menu-item (click)="openSignUpDialog()">
                 <mat-icon>app_registration</mat-icon>
                 <span>Registro</span>
               </button>
         </ng-container>
         
         <ng-container *ngIf="user">
-            <button mat-menu-item>
+            <button mat-menu-item (click)="signOut()">
                 <mat-icon>logout</mat-icon>
                 <span>Cerrar sesión</span>
             </button>
@@ -30,9 +30,6 @@
   </mat-toolbar>
 
   <main>
-    <button mat-icon-button aria-label="Example icon button with a vertical three dot icon">
-        <mat-icon>more_vert</mat-icon>
-      </button>
     <router-outlet></router-outlet>
 
   </main>
