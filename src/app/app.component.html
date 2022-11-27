@@ -1,41 +1,49 @@
 <mat-toolbar color="primary">
-    <mat-toolbar-row>
-      <span>Proyecto ADA</span>
-      <span class="example-spacer"></span>
-      <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
-        <mat-icon>menu</mat-icon>
-      </button>
-     
-      <mat-menu #menu="matMenu">
-        <ng-container *ngIf="!user">
-            <button mat-menu-item (click)="openLoginDialog()">
-                <mat-icon>login</mat-icon>
-                <span>Iniciar sesión</span>
-              </button>
-              <button mat-menu-item (click)="openSignUpDialog()">
-                <mat-icon>app_registration</mat-icon>
-                <span>Registro</span>
-              </button>
-        </ng-container>
-        
-        <ng-container *ngIf="user">
-            <button mat-menu-item  routerLink="/quizz">
-                <mat-icon>
-                  psychology_alt
-                </mat-icon>
-                <span>Hacer quizz</span>
-            </button>
-            <button mat-menu-item (click)="signOut()">
-                <mat-icon>logout</mat-icon>
-                <span>Cerrar sesión</span>
-            </button>
-        </ng-container>
-        
-      </mat-menu>
-    </mat-toolbar-row>
-  </mat-toolbar>
+  <mat-toolbar-row>
+    <a class="ada" routerLink="/">Proyecto ADA</a>
+    <span class="example-spacer"></span>
+    <button
+      mat-icon-button
+      [matMenuTriggerFor]="menu"
+      aria-label="Example icon-button with a menu"
+    >
+      <mat-icon>menu</mat-icon>
+    </button>
 
-  <main>
-    <router-outlet></router-outlet>
+    <mat-menu #menu="matMenu">
+      <ng-container *ngIf="!user">
+        <button mat-menu-item (click)="openLoginDialog()">
+          <mat-icon>login</mat-icon>
+          <span>Iniciar sesión</span>
+        </button>
+        <button mat-menu-item (click)="openSignUpDialog()">
+          <mat-icon>app_registration</mat-icon>
+          <span>Registro</span>
+        </button>
+      </ng-container>
 
-  </main>
+      <ng-container *ngIf="user">
+        <button mat-menu-item routerLink="/articulos/nuevo">
+          <mat-icon>
+            add
+          </mat-icon>
+          <span>Agrega una nueva entrada</span>
+        </button>
+        <button mat-menu-item routerLink="/quizz">
+          <mat-icon>
+            psychology_alt
+          </mat-icon>
+          <span>Hacer quizz</span>
+        </button>
+        <button mat-menu-item (click)="signOut()">
+          <mat-icon>logout</mat-icon>
+          <span>Cerrar sesión</span>
+        </button>
+      </ng-container>
+    </mat-menu>
+  </mat-toolbar-row>
+</mat-toolbar>
+
+<main>
+  <router-outlet></router-outlet>
+</main>
