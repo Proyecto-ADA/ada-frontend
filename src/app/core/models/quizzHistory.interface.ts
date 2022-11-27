@@ -6,4 +6,5 @@ export interface IQuizzHistory {
   answers: number[]
   score: number
   rightAnswers: number
+  userUid: string
 }
