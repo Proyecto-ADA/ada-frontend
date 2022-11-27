@@ -5,6 +5,9 @@ import { IArticle } from 'src/app/core/models/article.interface'
 import { ArticlesService } from 'src/app/core/services/articles.service'
 import { debounceTime } from 'rxjs'
 import { QuizzService } from 'src/app/core/services/quizz.service'
+import { IQuizzHistory } from 'src/app/core/models/quizzHistory.interface'
+import { IUser } from 'src/app/core/models/user.interface'
+import { UsersService } from 'src/app/core/services/users.service'
 
 @Component({
   selector: 'app-shared-articles-list',
@@ -15,6 +18,8 @@ export class SharedArticlesListComponent implements OnInit {
   allArticles: IArticle[] = []
   articlesToShow: IArticle[] = []
   selectedCategories: string[] = []
+  top10: IQuizzHistory[] = []
+  usersTop10: IUser[] = []
 
   searchInput = new FormControl('')
   filters = this.fb.group({
@@ -29,7 +34,8 @@ export class SharedArticlesListComponent implements OnInit {
     private fb: FormBuilder,
     private router: Router,
     private route: ActivatedRoute,
-    private quizzService: QuizzService
+    private quizzService: QuizzService,
+    private usersService: UsersService
   ) {}
 
   ngOnInit(): void {
@@ -41,9 +47,15 @@ export class SharedArticlesListComponent implements OnInit {
     this.handleFiltersChange()
     this.subscribeToQueryParams()
     this.subscribeToSearchInput()
-    this.quizzService.history.subscribe(history => {
-      console.log(history);
-      
+    this.quizzService.history.subscribe(async (history) => {
+      this.top10 = history.sort((a, b) => b.score - a.score)
+
+      for(const quizz of this.top10) {
+        const user = await this.usersService.findByUid(quizz.userUid)  
+        this.usersTop10 = [...this.usersTop10, user.docs[0].data()]
+      }
+      console.log(this.usersTop10);
+            
     })
   }
 
