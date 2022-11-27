@@ -8,9 +8,71 @@
   </mat-card-header>
   <mat-card-content>
     <mat-tab-group>
-      <mat-tab label="Mis articulos">Content 1</mat-tab>
-      <mat-tab label="Mis favoritos">Content 2</mat-tab>
-      <mat-tab label="Mis quizzes">Content 3</mat-tab>
+      <mat-tab label="Mis articulos">
+        <mat-card
+          class="example-card articles"
+          *ngFor="let article of userArticles"
+        >
+          <mat-card-header>
+            <mat-card-title>{{ article.title }}</mat-card-title>
+          </mat-card-header>
+          <img mat-card-image [src]="article.image" alt="Imagen del articulo" />
+          <mat-card-content>
+            <mat-chip-list aria-label="Categorias">
+              <mat-chip
+                *ngFor="let category of article.categories"
+                color="primary"
+                selected
+              >
+                {{ category }}
+              </mat-chip>
+            </mat-chip-list>
+          </mat-card-content>
+          <mat-card-actions>
+            <button mat-button [routerLink]="[article.id]">
+              Ver más
+            </button>
+          </mat-card-actions>
+        </mat-card>
+      </mat-tab>
+      <mat-tab label="Mis favoritos">
+        <mat-card
+          class="example-card articles"
+          *ngFor="let article of likedArticles"
+        >
+          <mat-card-header>
+            <mat-card-title>{{ article.title }}</mat-card-title>
+          </mat-card-header>
+          <img mat-card-image [src]="article.image" alt="Imagen del articulo" />
+          <mat-card-content>
+            <mat-chip-list aria-label="Categorias">
+              <mat-chip
+                *ngFor="let category of article.categories"
+                color="primary"
+                selected
+              >
+                {{ category }}
+              </mat-chip>
+            </mat-chip-list>
+          </mat-card-content>
+          <mat-card-actions>
+            <button mat-button [routerLink]="[article.id]">
+              Ver más
+            </button>
+          </mat-card-actions>
+        </mat-card>
+      </mat-tab>
+      <mat-tab label="Mis quizzes">
+        <mat-list>
+          <ng-container *ngFor="let quizz of userQuizzes">
+            <mat-list-item>
+              {{ quizz.id }} - {{ quizz.score }} puntos -
+              <a [routerLink]="['/quizz', quizz.id]">Ver detalle</a>
+            </mat-list-item>
+            <mat-divider></mat-divider>
+          </ng-container>
+        </mat-list>
+      </mat-tab>
     </mat-tab-group>
   </mat-card-content>
 </mat-card>

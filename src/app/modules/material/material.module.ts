@@ -21,6 +21,8 @@ import { MatGridListModule } from '@angular/material/grid-list'
 import { MatCheckboxModule } from '@angular/material/checkbox'
 import { MatToolbarModule } from '@angular/material/toolbar'
 import { MatTabsModule } from '@angular/material/tabs'
+import { MatListModule } from '@angular/material/list'
+import { MatDividerModule } from '@angular/material/divider'
 
 @NgModule({
   declarations: [],
@@ -46,7 +48,9 @@ import { MatTabsModule } from '@angular/material/tabs'
     MatGridListModule,
     MatCheckboxModule,
     MatToolbarModule,
+    MatDividerModule,
     MatTabsModule,
+    MatListModule,
   ],
   exports: [
     MatButtonModule,
@@ -57,9 +61,11 @@ import { MatTabsModule } from '@angular/material/tabs'
     MatTableModule,
     MatSelectModule,
     MatSlideToggleModule,
+    MatDividerModule,
     MatMenuModule,
     MatProgressSpinnerModule,
     MatStepperModule,
+    MatListModule,
     MatRadioModule,
     MatExpansionModule,
     MatChipsModule,

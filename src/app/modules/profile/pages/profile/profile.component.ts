@@ -1,3 +1,4 @@
+import { IQuizzHistory } from './../../../../core/models/quizzHistory.interface'
 import { Component, OnInit } from '@angular/core'
 import { IArticle } from 'src/app/core/models/article.interface'
 import { ArticlesService } from 'src/app/core/services/articles.service'
@@ -14,6 +15,7 @@ export class ProfileComponent implements OnInit {
   user: any
   userArticles: IArticle[] = []
   likedArticles: IArticle[] = []
+  userQuizzes: IQuizzHistory[] = []
   constructor(
     private authService: AuthService,
     private usersService: UsersService,
@@ -39,6 +41,12 @@ export class ProfileComponent implements OnInit {
 
           this.likedArticles = articles.filter(({ id }) =>
             this.user.likedArticles.includes(id),
+          )
+        })
+
+        this.quizzService.history.subscribe((history) => {
+          this.userQuizzes = history.filter(
+            ({ userUid }) => userUid === this.user.uid,
           )
         })
       })
