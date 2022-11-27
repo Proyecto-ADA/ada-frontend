@@ -54,8 +54,7 @@ export class SharedArticlesListComponent implements OnInit {
         const user = await this.usersService.findByUid(quizz.userUid)  
         this.usersTop10 = [...this.usersTop10, user.docs[0].data()]
       }
-      console.log(this.usersTop10);
-            
+  
     })
   }
 
