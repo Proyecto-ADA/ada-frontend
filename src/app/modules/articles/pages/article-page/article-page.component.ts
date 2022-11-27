@@ -85,9 +85,14 @@ export class ArticlePageComponent implements OnInit {
 
   getLoggedUser() {
     this.authService.isLoggedIn().subscribe(async (user) => {
+
       const response = await this.usersService.findByUid(user!.uid)
-      this.user = response.docs[0].data()
-      this.user.id = response.docs[0].id
+      if(response.docs.length > 0){
+        this.user = response.docs[0].data()
+        this.user.id = response.docs[0].id
+      }
+      
+      
     })
   }
 

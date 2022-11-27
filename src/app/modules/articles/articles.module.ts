@@ -11,6 +11,7 @@ import { ArticlePageComponent } from './pages/article-page/article-page.componen
 import { ShareButtonModule } from 'ngx-sharebuttons/button'
 import { ShareIconsModule } from 'ngx-sharebuttons/icons';
 import { ArticlesListComponent } from './pages/articles-list/articles-list.component'
+import { SharedModule } from '../shared/shared.module'
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { ArticlesListComponent } from './pages/articles-list/articles-list.compo
     MaterialModule,
     ShareButtonModule,
     ShareIconsModule,
+    SharedModule
   ],
   exports: [ArticlesListComponent]
 })

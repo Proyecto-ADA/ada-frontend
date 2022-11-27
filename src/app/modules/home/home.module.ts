@@ -7,7 +7,7 @@ import { HomePageComponent } from './pages/home-page/home-page.component'
 import { MaterialModule } from '../material/material.module'
 import { SignUpLoginFormComponent } from './components/signup-login-form/signup-login-form.component'
 import { CompleteProfileComponent } from './components/complete-profile/complete-profile.component'
-import { ArticlesModule } from '../articles/articles.module'
+import { SharedModule } from '../shared/shared.module'
 
 @NgModule({
   declarations: [
@@ -21,7 +21,7 @@ import { ArticlesModule } from '../articles/articles.module'
     MaterialModule,
     ReactiveFormsModule,
     FormsModule,
-    ArticlesModule
+    SharedModule
   ],
 })
 export class HomeModule {}
