@@ -26,6 +26,22 @@
   }
 }
 
+@media screen and (max-width: 768px) {
+  .filters {
+    display: none;
+  }
+
+  .filters__button {
+    display: block;
+    margin: 0 auto;
+    margin-top: 20px;
+  }
+  .articles {
+    margin-top: 50px;
+    width: unset !important;
+  }
+}
+
 mat-chip {
   cursor: pointer;
 }
