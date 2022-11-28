@@ -47,6 +47,16 @@
           Puntaje:
           {{ isRightAnswer(question, quizz.answers[i]) ? question.score : 0 }}
         </h4>
+
+        <h5
+          *ngIf="
+            quizz.questions[i].knowMoreUrl &&
+            !isRightAnswer(question, quizz.answers[i])
+          "
+        >
+          Para conocer más al respecto, te invitamos a visitar
+          <a [routerLink]="quizz.questions[i].knowMoreUrl">este enlace</a>
+        </h5>
       </div>
     </mat-expansion-panel>
   </mat-accordion>
