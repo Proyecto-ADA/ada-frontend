@@ -7,4 +7,5 @@ export interface IQuestion {
   score: number
   rightAnswerNumber: number
   isEnabled: boolean
+  knowMoreUrl: string
 }

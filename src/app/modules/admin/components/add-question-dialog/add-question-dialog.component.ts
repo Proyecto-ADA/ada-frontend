@@ -11,7 +11,7 @@ import { QuestionService } from 'src/app/core/services/question.service'
 })
 export class AddQuestionDialogComponent implements OnInit {
   @Input() editQuestion: IQuestion | undefined
-  @Input() title = ""
+  @Input() title = ''
   questionForm: FormGroup
   posibleAnswers: string[] = []
   isLoading = false
@@ -20,11 +20,12 @@ export class AddQuestionDialogComponent implements OnInit {
     private questionsService: QuestionService,
     private dialogService: MatDialog,
   ) {
-    this.questionForm = fb.group({
-      question: ['', [Validators.required, Validators.minLength(20)]],
+    this.questionForm = this.fb.group({
+      question: ['', [Validators.required, Validators.minLength(10)]],
       answer1: ['', [Validators.required, Validators.minLength(10)]],
       answer2: ['', [Validators.required, Validators.minLength(10)]],
       answer3: ['', [Validators.required, Validators.minLength(10)]],
+      knowMoreUrl: ['', [Validators.required]],
       rightAnswerNumber: [null, Validators.required],
       score: [null, Validators.required],
       isEnabled: [false],
@@ -59,6 +60,7 @@ export class AddQuestionDialogComponent implements OnInit {
       answer1: this.editQuestion?.answer1,
       answer2: this.editQuestion?.answer2,
       answer3: this.editQuestion?.answer3,
+      knowMoreUrl: this.editQuestion?.knowMoreUrl,
       rightAnswerNumber: this.editQuestion?.rightAnswerNumber,
       score: this.editQuestion?.score,
       isEnabled: this.editQuestion?.isEnabled,
